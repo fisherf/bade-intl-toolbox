@@ -9,67 +9,403 @@
 header h1{margin:0;font-size:28px;font-weight:650}
 header p{margin:8px 0 0;color:rgba(255,255,255,.9);font-size:14px}
 main{max-width:1180px;margin:-22px auto 40px;padding:0 20px}.tool-shell{display:grid;grid-template-columns:290px minmax(0,1fr);gap:18px}.side-card,.main-card,.result-card,.logic-card,.instruction-card{background:var(--card);border:1px solid rgba(0,0,0,.06);box-shadow:var(--shadow);border-radius:var(--radius)}.side-card{padding:18px;position:sticky;top:16px}.side-title{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.04em;margin-bottom:12px}.nav-item{padding:12px;border-radius:10px;margin-bottom:8px;background:#fafafa;cursor:pointer}.nav-item.active{background:var(--light);border:1px solid #b3d6f2;color:#033f63}.nav-group{padding:12px;border-radius:10px;margin:12px 0 8px;background:#fff;border:1px solid #edebe9}.nav-group strong{display:block;font-size:14px}.nav-group span{display:block;font-size:12px;color:var(--muted);margin-top:3px}.nav-item.nav-sub{margin-left:16px;padding:10px 12px;background:#fff}.nav-item.nav-sub strong{font-size:13px}.bookmarklet-tabs{display:flex;gap:8px;margin:0 0 18px;flex-wrap:wrap}.bookmarklet-tab{border-radius:999px;padding:8px 13px;background:#f3f2f1;color:#242424;text-decoration:none;font-weight:650;font-size:13px}.bookmarklet-tab.active-tab{background:var(--blue);color:#fff}.nav-item.disabled{opacity:.65;cursor:not-allowed}.nav-item strong{display:block;font-size:14px}.nav-item span{display:block;font-size:12px;color:var(--muted);margin-top:3px}.main-card{padding:22px}.module-panel{display:none}.module-panel.active-panel{display:block}.section-title{display:flex;justify-content:space-between;gap:16px;margin-bottom:18px}.section-title h2{margin:0;font-size:22px}.section-title p{margin:6px 0 0;color:var(--muted);font-size:14px}.input-wrap{margin-top:14px}label{display:block;font-weight:650;margin-bottom:8px}textarea{width:100%;min-height:96px;padding:13px 14px;border:1px solid var(--border);border-radius:12px;font-family:Consolas,"Courier New",monospace;font-size:13px}.hint{color:var(--muted);font-size:12px;margin-top:8px}.actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:16px}button,.link-button{border:0;border-radius:10px;padding:10px 14px;background:var(--blue);color:#fff;font-weight:650;cursor:pointer;text-decoration:none;font-size:14px;display:inline-flex}button.secondary{background:#f3f2f1;color:#242424}.status{margin-top:14px;padding:12px 14px;border-radius:12px;display:none;font-size:13px}.status.show{display:block}.status.error{background:#fde7e9;color:var(--bad);border:1px solid #f3b7bd}.status.info{background:var(--light);color:#034c7c;border:1px solid #b3d6f2}.results-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}.result-card{padding:14px;box-shadow:none;border:1px solid #e6e6e6;border-radius:12px}.result-card.disabled{opacity:.65;background:#fafafa}.result-head{display:flex;justify-content:space-between;gap:12px;margin-bottom:10px}.result-name{font-weight:700}.result-actions{display:flex;gap:8px}.mini-btn{padding:6px 9px;border-radius:8px;font-size:12px}.url-box{word-break:break-all;font-family:Consolas,"Courier New",monospace;font-size:12px;background:#f8f8f8;border:1px solid #edebe9;border-radius:9px;padding:10px;min-height:58px}.logic-card,.instruction-card{padding:18px;margin-top:18px;box-shadow:none}.logic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.logic-block,.instruction-section{background:#fafafa;border:1px solid #edebe9;border-radius:12px;padding:14px;font-size:13px;line-height:1.45}.instruction-section{margin-top:12px}.instruction-section h4{margin:0 0 8px;font-size:15px}.instruction-section li{margin:8px 0}.toast{position:fixed;right:18px;bottom:18px;background:#252423;color:#fff;padding:12px 14px;border-radius:12px;display:none}.toast.show{display:block}.bookmarkletBanner{background:#deecf9;border:1px solid #8ec8f2;border-radius:10px;padding:12px 14px;margin:0 0 16px;color:#004578}.bookmarkletBanner a{font-weight:700;color:#005a9e}@media(max-width:860px){.tool-shell{grid-template-columns:1fr}.side-card{position:static}.results-grid,.logic-grid{grid-template-columns:1fr}}
+/* =========================
+   URL Maker Tabs
+   ========================= */
+
+.tool-tabs{
+  display:flex;
+  gap:8px;
+  margin-bottom:16px;
+}
+
+.tool-tab{
+  background:transparent;
+  color:var(--text-color,#333);
+  border:1px solid #d0d0d0;
+  padding:8px 16px;
+  border-radius:6px;
+  cursor:pointer;
+}
+
+.tool-tab.active{
+  background:#106ebe;
+  border-color:#106ebe;
+  color:#fff;
+}
+
+.tab-content{
+  display:none;
+}
+
+.tab-content.active{
+  display:block;
+}
+
+
+/* =========================
+   Catalog URL Maker
+   Scoped styles
+   ========================= */
+
+.catalog-url-maker{
+  max-width:100%;
+}
+
+.catalog-url-maker *{
+  box-sizing:border-box;
+}
+
+.catalog-top-row{
+  display:grid;
+  grid-template-columns:120px 220px 260px;
+  gap:16px;
+  align-items:stretch;
+  margin-bottom:20px;
+}
+
+.catalog-setting-card{
+  background:#f5f8fc;
+  border:1px solid #d8e3f0;
+  border-radius:8px;
+  padding:12px;
+}
+
+.catalog-card-title{
+  display:block;
+  font-weight:600;
+  margin-bottom:8px;
+}
+
+#catalogLlcc{
+  width:70px;
+  min-height:48px;
+  padding:8px;
+}
+
+.catalog-entry{
+  background:#fafcff;
+  border:1px solid #d8e3f0;
+  border-radius:10px;
+  padding:16px;
+  margin-bottom:16px;
+}
+
+.catalog-entry-fields-row{
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:16px;
+  margin-bottom:16px;
+}
+
+.catalog-entry-options-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:16px;
+  margin-bottom:12px;
+}
+
+.catalog-entry .input-wrap{
+  margin-bottom:0;
+}
+
+.catalog-entry .input-wrap label{
+  display:block;
+  font-weight:600;
+  margin-bottom:6px;
+}
+
+.catalog-text-input{
+  width:100%;
+  min-height:48px;
+  padding:8px;
+}
+
+.catalog-option-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+
+.catalog-option-list label{
+  display:flex;
+  align-items:center;
+  gap:6px;
+  margin-bottom:0;
+  font-weight:400;
+}
+
+.catalog-remove-row{
+  text-align:right;
+}
+
+#catalogOutput{
+  width:100%;
+  min-height:72px;
+  resize:vertical;
+  overflow:hidden;
+  font-family:Consolas, Monaco, monospace;
+  font-size:12px;
+  line-height:1.5;
+  padding:8px;
+}
+
+@media (max-width:900px){
+  .catalog-top-row{
+    grid-template-columns:1fr;
+  }
+
+  .catalog-entry-fields-row,
+  .catalog-entry-options-row{
+    grid-template-columns:1fr;
+  }
+
+  #catalogLlcc{
+    width:100%;
+  }
+}
+    
+/* =========================
+   XLIFF/XML Generator
+   ========================= */
+.xliff-generator-card textarea{min-height:88px}
+#xliffOutput{min-height:180px}
+/* TXLF space validation */
+#xliffSpaceValidationBox{white-space:pre-wrap}
+#xliffFixSpacesBtn:disabled{opacity:.55;cursor:not-allowed}
+
     </style>
 </head>
 <body>
   <header><h1>BADE INTL Toolbox</h1><p>Toolbox for BADE Intl daily validation work: URL conversion, bookmarklets, and more functions.</p></header>
   <main>
-<div class="tool-shell"><aside class="side-card"><div class="side-title">Tools</div><div class="nav-item active" data-tool="converter"><strong>🟢 AEM URL Converter</strong><span>Page, Launch, XF, CF, and XF preview links.</span></div><div class="nav-item" data-tool="liveurl"><strong>🟢 URL maker</strong><span>Create URLs by market.</span></div><div class="nav-item" data-tool="clickrun"><strong>🟢 Click &amp; Run</strong><span>One-click AEM automations.</span></div><div class="nav-group"><strong>🟢 Bookmarklet Home</strong><span>Bookmarklet tools</span></div><div class="nav-item nav-sub" data-tool="pageinfo"><strong>Page Basic Info</strong><span>Metadata, UHF IDs, and link comparison.</span></div><div class="nav-item nav-sub" data-tool="xf"><strong>XF Checker</strong><span>Pricing-aware XF list and dates.</span></div><div class="nav-item nav-sub" data-tool="pagesize"><strong>Page Size Checker</strong><span>OCToolKit-style optimized page size.</span></div><div class="nav-item disabled" data-tool="planned"><strong>⚪ More Functions</strong><span>Coming next</span></div></aside>
+<div class="tool-shell"><aside class="side-card"><div class="side-title">Tools</div><div class="nav-item active" data-tool="converter"><strong>🟢 AEM URL Converter</strong><span>Page, Launch, XF, CF, and XF preview links.</span></div><div class="nav-item" data-tool="liveurl"><strong>🟢 URL maker</strong><span>Create URLs by market.</span></div><div class="nav-item" data-tool="clickrun"><strong>🟢 Click &amp; Run</strong><span>One-click automations.</span></div><div class="nav-item" data-tool="bookmarklet"><strong>🟢 Bookmarklet Home</strong><span>Bookmarklet tools. Default: Page Basic Info.</span></div><div class="nav-item disabled" data-tool="planned"><strong>⚪ More Functions</strong><span>Coming next</span></div></aside>
 <section class="main-card">
 <!-- AEM URL Converter module panel -->
 <div class="module-panel active-panel" id="module-converter"><div class="section-title"><div><h2>AEM URL Converter</h2><p>Paste one URL or content path. The tool detects the object type and generates related links.</p></div><button id="loadSamplesBtn" type="button">Load samples</button></div><div class="input-wrap"><label for="urlInput">Live URL / AEM URL / AEM path</label><textarea id="urlInput" spellcheck="false" placeholder="Paste a live URL, AEM URL, XF path, or CF path here"></textarea><div class="hint">Tip: If a live Page URL has no locale, the tool defaults it to <strong>en-us</strong>.</div></div><div class="actions"><button id="generateBtn" type="button">Generate Links</button><button id="copyPathBtn" class="secondary" type="button" disabled>Copy Path</button><button id="copyAllBtn" class="secondary" type="button" disabled>Copy All Links</button><button id="openAllBtn" class="secondary" type="button" disabled>Open All Links</button><button id="clearBtn" class="secondary" type="button">Clear</button></div><div id="statusBox" class="status"></div><h3>Generated links</h3><div class="results-grid" id="resultsGrid"></div></div>
 <!-- URL maker module panel -->
-<div class="module-panel" id="module-liveurl"><div class="section-title"><div><h2>URL Maker</h2><p>
-      Paste a Public URL, Authoring URL, Preview URL, Properties URL,
-      Page Path, XF Path, or CF Path and generate market-specific URLs.
-      </p></div></div><div class="input-wrap"><label for="liveUrlInput">Input URL or Path</label><textarea
-      id="liveUrlInput"
-      spellcheck="false"
-      placeholder="Paste Public URL, AEM URL, Preview URL, Properties URL, XF Path, CF Path, or Content Path"></textarea></div><div class="input-wrap"><label for="marketsInput">Markets (optional)</label><textarea
-      id="marketsInput"
-      spellcheck="false"
-      placeholder="Examples:
+<div class="module-panel" id="module-liveurl">
+
+  <div class="section-title">
+    <div>
+      <h2>URL Maker</h2>
+    </div>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tool-tabs">
+    <button class="tool-tab active"
+            data-tab="hpUrlMakerTab">
+      HP URL Maker
+    </button>
+
+    <button class="tool-tab"
+            data-tab="catalogUrlMakerTab">
+      Catalog URL Maker
+    </button>
+  </div>
+
+  <!-- HP URL Maker -->
+  <div id="hpUrlMakerTab" class="tab-content active">
+
+    <div class="input-wrap">
+      <label for="liveUrlInput">Input URL or Path</label>
+
+      <textarea
+        id="liveUrlInput"
+        spellcheck="false"
+        placeholder="Paste Public URL, AEM URL, Preview URL, Properties URL, XF Path, CF Path, or Content Path"></textarea>
+    </div>
+
+    <div class="input-wrap">
+      <label for="marketsInput">Markets (optional)</label>
+
+      <textarea
+        id="marketsInput"
+        spellcheck="false"
+        placeholder="Examples:
 fr-fr,de-de,en-gb
 or
 fr-fr;de-de;en-gb
 or
 fr-fr
 de-de
-en-gb"></textarea><div class="hint">
-      Leave blank to generate URLs for all supported markets.
-    </div></div><div class="input-wrap"><label>Output Format</label><label><input
-        type="radio"
-        name="outputFormat"
-        value="current"
-        checked>
-      Current Format
-    </label><label><input
-        type="radio"
-        name="outputFormat"
-        value="live">
-      Always Public URL
-    </label></div><div class="actions"><button id="liveUrlGenerateBtn" type="button">
-      Generate URLs
-    </button><button id="liveUrlCopyAllBtn"
-            class="secondary"
-            type="button"
-            disabled>
-      Copy All URLs
-    </button><button id="liveUrlOpenAllBtn"
-            class="secondary"
-            type="button"
-            disabled>
-      Open All URLs
-    </button><button id="liveUrlClearBtn"
-            class="secondary"
-            type="button">
-      Clear
-    </button></div><div id="liveUrlStatusBox" class="status"></div><h3>Generated URLs</h3><div class="results-grid"
-       id="liveUrlResultsGrid"></div>
+en-gb"></textarea>
 
-</div>
+      <div class="hint">
+        Leave blank to generate URLs for all supported markets.
+      </div>
+    </div>
+
+    <div class="input-wrap">
+      <label>Output Format</label>
+
+      <label>
+        <input
+          type="radio"
+          name="outputFormat"
+          value="current"
+          checked>
+        Current Format
+      </label>
+
+      <label>
+        <input
+          type="radio"
+          name="outputFormat"
+          value="live">
+        Always Public URL
+      </label>
+    </div>
+
+    <div class="actions">
+      <button id="liveUrlGenerateBtn" type="button">
+        Generate URLs
+      </button>
+
+      <button id="liveUrlCopyAllBtn"
+              class="secondary"
+              type="button"
+              disabled>
+        Copy All URLs
+      </button>
+
+      <button id="liveUrlOpenAllBtn"
+              class="secondary"
+              type="button"
+              disabled>
+        Open All URLs
+      </button>
+
+      <button id="liveUrlClearBtn"
+              class="secondary"
+              type="button">
+        Clear
+      </button>
+    </div>
+
+    <div id="liveUrlStatusBox" class="status"></div>
+
+    <h3>Generated URLs</h3>
+
+    <div class="results-grid"
+         id="liveUrlResultsGrid"></div>
+
+  </div>
+
+<!-- Catalog URL Maker -->
+<div id="catalogUrlMakerTab" class="tab-content catalog-url-maker">
+
+  <div class="catalog-top-row">
+
+    <div class="catalog-setting-card">
+      <label class="catalog-card-title" for="catalogLlcc">LL-CC</label>
+
+      <input id="catalogLlcc"
+             type="text"
+             autocomplete="off"
+             spellcheck="false"
+             placeholder="en-ie">
+    </div>
+
+    <div class="catalog-setting-card">
+      <span class="catalog-card-title">Catalog Type</span>
+
+      <div class="catalog-option-list">
+        <label>
+          <input type="radio"
+                 name="catalogType"
+                 value="4"
+                 checked>
+          Commercial
+        </label>
+
+        <label>
+          <input type="radio"
+                 name="catalogType"
+                 value="1">
+          Consumer
+        </label>
+      </div>
+    </div>
+
+    <div class="catalog-setting-card">
+      <span class="catalog-card-title">Audience Type</span>
+
+      <div class="catalog-option-list">
+        <label>
+          <input type="radio"
+                 name="audienceType"
+                 value="0"
+                 checked>
+          Direct Commercial
+        </label>
+
+        <label>
+          <input type="radio"
+                 name="audienceType"
+                 value="1">
+          Partner Commercial
+        </label>
+      </div>
+    </div>
+
+  </div>
+
+  <h3>Catalog Entries</h3>
+
+  <div id="catalogEntriesContainer"></div>
+
+  <div class="actions">
+
+    <button type="button"
+            id="catalogAddEntryBtn">
+      + Add Entry
+    </button>
+
+    <button type="button"
+            id="catalogGenerateBtn">
+      Generate URL
+    </button>
+
+    <button type="button"
+            id="catalogCopyBtn"
+            class="secondary">
+      Copy URL
+    </button>
+
+    <button type="button"
+            id="catalogOpenBtn"
+            class="secondary">
+      Open URL
+    </button>
+
+    <button type="button"
+            id="catalogClearBtn"
+            class="secondary">
+      Clear
+    </button>
+
+  </div>
+
+  <div id="catalogStatusBox"
+       class="status"></div>
+
+  <div class="catalog-setting-card">
+    <label class="catalog-card-title">Generated URL</label>
+
+    <textarea id="catalogOutput"
+              readonly
+              rows="4"
+              placeholder="Generated catalog URL will appear here..."></textarea>
+  </div>
+
+</div> <!-- catalogUrlMakerTab -->
+
+</div> <!-- module-liveurl -->
+
 <!-- Click Run module panel -->
-<div class="module-panel" id="module-clickrun"><div class="section-title"><div><h2>Click &amp; Run</h2><p>Collection of one-click automation tools for AEM operations.</p></div></div><div class="logic-grid"><div class="logic-block"><strong>AEM Bulk Publish</strong><br>Launch the AEM bulk publish workflow dialog. Paste a Microsoft.com or Azure.com URL, select markets, and create the publish workflow.<div class="actions"><button id="launchAemBulkPublish" type="button">Launch AEM Bulk Publish</button></div></div><div class="logic-block"><strong>Reserved</strong><br>Future automation card.</div><div class="logic-block"><strong>Reserved</strong><br>Future automation card.</div><div class="logic-block"><strong>Reserved</strong><br>Future automation card.</div></div></div>  
+<div class="module-panel" id="module-clickrun"><div class="section-title"><div><h2>Click &amp; Run</h2><p>Collection of one-click automation tools for production operations.</p></div></div><div class="logic-grid"><div class="logic-block"><strong>AEM Bulk Publish</strong><br>Launch the AEM bulk publish workflow dialog. Paste a Microsoft.com or Azure.com URL, select markets, and create the publish workflow.<div class="actions"><button id="launchAemBulkPublish" type="button">Launch AEM Bulk Publish</button></div></div><div class="logic-block xliff-generator-card"><strong>TXLF XLIFF Generator</strong><br>Generate TXLF-ready XLIFF from pasted localization strings. Each non-empty line becomes one translation unit.<div class="input-wrap"><label for="xliffSourceInput">Source strings</label><textarea id="xliffSourceInput" spellcheck="false" placeholder="Paste one source string per line"></textarea><div class="hint">Space validation runs automatically. U+0020 SPACE is valid; U+202F and other non-standard spaces must be fixed before TXLF generation.</div></div><div class="input-wrap"><label>Output format</label><label><input type="radio" name="xliffGeneratorFormat" value="txlf" checked> TXLF XLIFF</label><label><input type="radio" name="xliffGeneratorFormat" value="xliff"> Generic XLIFF 1.2</label><label><input type="radio" name="xliffGeneratorFormat" value="xml"> Simple XML</label></div><div id="xliffSpaceValidationBox" class="status"></div><div class="actions"><button id="xliffGenerateBtn" type="button">Generate</button><button id="xliffFixSpacesBtn" class="secondary" type="button" disabled>Fix All Spaces</button><button id="xliffCopyBtn" class="secondary" type="button" disabled>Copy Output</button><button id="xliffDownloadBtn" class="secondary" type="button" disabled>Download File</button><button id="xliffClearBtn" class="secondary" type="button">Clear</button></div><div id="xliffStatusBox" class="status"></div><div class="input-wrap"><label for="xliffOutput">Generated output</label><textarea id="xliffOutput" spellcheck="false" readonly placeholder="Generated XLIFF/XML will appear here..."></textarea></div></div><div class="logic-block"><strong>Reserved</strong><br>Future automation card.</div><div class="logic-block"><strong>Reserved</strong><br>Future automation card.</div></div></div>  
 <!-- Bookmarklet module panel -->
 <!-- XF checker -->
 <div class="module-panel" id="module-xf"><div class="bookmarklet-tabs"><button class="bookmarklet-tab" type="button" onclick="switchTool('pageinfo')">Page Basic Info</button><button class="bookmarklet-tab active-tab" type="button" onclick="switchTool('xf')">XF Checker</button><button class="bookmarklet-tab" type="button" onclick="switchTool('pagesize')">Page Size Checker</button></div><div class="bookmarkletBanner">ℹ️ For the latest bookmarklet script versions, find them <a href="https://microsoft.sharepoint-df.com/teams/BADEInternational/Shared%20Documents/Forms/Latest%20on%20top.aspx?id=%2Fteams%2FBADEInternational%2FShared%20Documents%2FProduction%2FBADE%20INTL%20Toolbox&viewid=61ae1445%2Dd7be%2D4181%2D8ec1%2Dcc81894b4983&share=cgrVamskZGPKTagG2IS5%5F37gEgUCAPqWkabhADgzdtTnOIhDYg" target="_blank" rel="noopener">here</a>.</div><div class="section-title"><div><h2>Bookmarklet Home · XF Checker</h2><p>XF Checker runs inside AEM, so it can read AEM references without browser cross-origin blocking.</p></div></div><div class="logic-grid"><div class="logic-block"><strong>How to use</strong><br>1. Drag the <strong>XF Checker</strong> button below to your Edge bookmarks bar.<br>2. Open AEM and sign in if needed.<br>3. Select the bookmarklet while you are on AEM.<br>4. Paste a page URL, authoring URL, preview URL, or <code>/content/...</code> page path.<br>5. Results open in a new tab.</div><div class="logic-block"><strong>Install bookmarklet</strong><br><p>Drag this button to the bookmarks bar:</p><a id="xfCheckerBookmarklet" class="link-button" href="#">XF Checker</a><p style="font-size:12px;color:#616161;">If the bookmarks bar is hidden in Edge, press Ctrl + Shift + B.</p></div></div><div class="actions"><button id="openAemForXfChecker" type="button">Open AEM</button></div><div class="instruction-card"><h3>Version</h3><div class="instruction-section">2026-7-16 V3: updated Pricing XF path and exception list so XFs could be categorized more accurately.</div></div></div>
@@ -155,6 +491,7 @@ function generate(){try{const d=detect(els.input.value),r=build(d);currentResult
 
 const LIVE_MARKETS = {
   azure:['cs-cz','da-dk','de-de','en-au','en-ca','en-gb','en-in','es-es','es-mx','fr-ca','fr-fr','hu-hu','id-id','it-it','ja-jp','ko-kr','nb-no','nl-nl','pl-pl','pt-br','pt-pt','ru-ru','sv-se','tr-tr','zh-cn','zh-tw'],
+  sdc:['cs-cz','da-dk','de-de','en-au','en-ca','en-gb','en-in','es-es','es-mx','fr-ca','fr-fr','hu-hu','id-id','it-it','ja-jp','ko-kr','nb-no','nl-nl','pl-pl','pt-br','pt-pt','ru-ru','sv-se','tr-tr','zh-cn','zh-tw'],
   evalcenter:['de-de','en-gb','en-in','es-es','es-mx','fr-fr','ja-jp','ko-kr','it-it','pt-br','ru-ru','zh-cn','zh-tw'],
   businessApps:['ar','cs-cz','da-dk','de-at','de-ch','de-de','el-gr','en','en-au','en-ca','en-gb','en-ie','en-in','en-my','en-nz','en-sg','en-za','es','es-ar','es-cl','es-co','es-es','es-mx','fi-fi','fr','fr-be','fr-ca','fr-ch','fr-fr','he-il','hu-hu','it-it','ja-jp','ko-kr','nb-no','nl-be','nl-nl','pl-pl','pt-br','pt-pt','ru-ru','sv-se','th-th','tr-tr','zh-cn','zh-hk','zh-tw'],
   default:['ar','bg-bg','cs-cz','da-dk','de-at','de-ch','de-de','el-gr','en','en-au','en-ca','en-gb','en-ie','en-in','en-my','en-nz','en-sg','en-za','es','es-ar','es-cl','es-co','es-es','es-mx','et-ee','fi-fi','fr','fr-be','fr-ca','fr-ch','fr-fr','he-il','hr-hr','hu-hu','id-id','it-it','ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-be','nl-nl','pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk','sl-si','sr-latn-rs','sv-se','th-th','tr-tr','uk-ua','vi-vn','zh-cn','zh-hk','zh-tw']
@@ -257,7 +594,11 @@ function liveDetectSite(u){
 
       outputHost='www.microsoft.com';
 
-      if(first==='evalcenter'){
+      if(first==='software-development-companies'){
+          siteKey='sdc';
+          siteName='Software Development Companies';
+      }
+      else if(first==='evalcenter'){
           siteKey='evalcenter';
           siteName='Eval Center';
       }
@@ -426,6 +767,16 @@ function detectSiteFromAemInput(raw){
         return 'azure';
     }
 
+    // SDC
+    if(
+        value.includes(
+            '/content/microsoft/bade/'
+        ) &&
+        value.includes('software-development-companies')
+    ){
+        return 'sdc';
+    }
+
     // BizApps
     if(
         value.includes(
@@ -501,6 +852,7 @@ if(alwaysPublic){
 
         const siteNameMap = {
             azure: 'ACOM',
+            sdc: 'Software Development Companies',
             businessApps: 'Business Apps',
             evalcenter: 'Eval Center',
             default: 'Full EOL'
@@ -535,10 +887,42 @@ if(alwaysPublic){
 
             let url = workingSource;
 
-            url = url.replace(
-                /\/(ar|bg-bg|cs-cz|da-dk|de-at|de-ch|de-de|el-gr|en|en-au|en-ca|en-gb|en-ie|en-in|en-my|en-nz|en-sg|en-us|en-za|es|es-ar|es-cl|es-co|es-es|es-mx|et-ee|fi-fi|fr|fr-be|fr-ca|fr-ch|fr-fr|he-il|hr-hr|hu-hu|id-id|it-it|ja-jp|ko-kr|lt-lt|lv-lv|nb-no|nl-be|nl-nl|pl-pl|pt-br|pt-pt|ro-ro|ru-ru|sk-sk|sl-si|sr-rs|sr-latn-rs|sv-se|th-th|tr-tr|uk-ua|vi-vn|zh-cn|zh-hk|zh-tw)(?=\/)/i,
-                '/' + locale
-            );
+            const marketPattern =
+                /\/(ar|bg-bg|cs-cz|da-dk|de-at|de-ch|de-de|el-gr|en|en-au|en-ca|en-gb|en-ie|en-in|en-my|en-nz|en-sg|en-us|en-za|es|es-ar|es-cl|es-co|es-es|es-mx|et-ee|fi-fi|fr|fr-be|fr-ca|fr-ch|fr-fr|he-il|hr-hr|hu-hu|id-id|it-it|ja-jp|ko-kr|lt-lt|lv-lv|nb-no|nl-be|nl-nl|pl-pl|pt-br|pt-pt|ro-ro|ru-ru|sk-sk|sl-si|sr-rs|sr-latn-rs|sv-se|th-th|tr-tr|uk-ua|vi-vn|zh-cn|zh-hk|zh-tw)(?=\/|$)/i;
+
+            const replacedUrl =
+                url.replace(
+                    marketPattern,
+                    '/' + locale
+                );
+
+            if(replacedUrl !== url){
+                url = replacedUrl;
+            }
+            else if(/^https?:\/\/(www\.)?microsoft\.com\//i.test(url)){
+                url = url.replace(
+                    /^(https?:\/\/(?:www\.)?microsoft\.com)\//i,
+                    '$1/' + locale + '/'
+                );
+            }
+            else if(/^https?:\/\/azure\.microsoft\.com\//i.test(url)){
+                url = url.replace(
+                    /^(https?:\/\/azure\.microsoft\.com)\//i,
+                    '$1/' + locale + '/'
+                );
+            }
+            else if(url.includes('/content/microsoft/bade/')){
+                url = url.replace(
+                    '/content/microsoft/bade/',
+                    '/content/microsoft/bade/' + locale + '/'
+                );
+            }
+            else if(url.includes('/content/azure/acom/')){
+                url = url.replace(
+                    '/content/azure/acom/',
+                    '/content/azure/acom/' + locale + '/'
+                );
+            }
 
             return {
                 market: m,
@@ -693,12 +1077,877 @@ if(liveEls.clear)
     );
 
 renderEmptyLiveUrlResults();
+(function () {
+
+  function initUrlMakerTabs() {
+
+    const urlMakerModule =
+      document.getElementById("module-liveurl");
+
+    if (!urlMakerModule) return;
+
+    urlMakerModule.querySelectorAll(".tool-tab").forEach(tab => {
+
+      tab.addEventListener("click", () => {
+
+        urlMakerModule
+          .querySelectorAll(".tool-tab")
+          .forEach(x => x.classList.remove("active"));
+
+        urlMakerModule
+          .querySelectorAll(".tab-content")
+          .forEach(x => x.classList.remove("active"));
+
+        tab.classList.add("active");
+
+        const targetTab =
+          urlMakerModule.querySelector(`#${tab.dataset.tab}`);
+
+        if (targetTab) {
+          targetTab.classList.add("active");
+        }
+
+      });
+
+    });
+
+  }
+
+
+  function initCatalogUrlMaker() {
+
+    const catalogEntriesContainer =
+      document.getElementById("catalogEntriesContainer");
+
+    if (!catalogEntriesContainer) return;
+
+    let catalogEntryCounter = 0;
+
+    function getSelectedCatalogType() {
+
+      return document.querySelector(
+        "input[name='catalogType']:checked"
+      )?.value || "4";
+
+    }
+
+    function isConsumerCatalog() {
+
+      return getSelectedCatalogType() === "1";
+
+    }
+
+    function resizeCatalogOutput() {
+
+      const textarea =
+        document.getElementById("catalogOutput");
+
+      if (!textarea) return;
+
+      textarea.style.height = "auto";
+      textarea.style.height =
+        textarea.scrollHeight + "px";
+
+    }
+
+    function escapeHtml(value) {
+
+      return String(value || "")
+        .replace(/&/g, "&amp;")
+        .replace(/"/g, "&quot;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;");
+
+    }
+
+    function setCatalogStatus(message, type = "info") {
+
+      const statusBox =
+        document.getElementById("catalogStatusBox");
+
+      if (!statusBox) return;
+
+      statusBox.textContent = message || "";
+      statusBox.className = message
+        ? `status show ${type}`
+        : "status";
+
+    }
+
+    function setPaymentOptionsForEntry(entry, consumerMode) {
+
+      const paymentRadios =
+        entry.querySelectorAll(".catalog-payment");
+
+      paymentRadios.forEach(radio => {
+
+        if (consumerMode) {
+
+          if (radio.value === "0") {
+            radio.checked = true;
+            radio.disabled = false;
+          } else {
+            radio.checked = false;
+            radio.disabled = true;
+          }
+
+        } else {
+
+          radio.disabled = false;
+
+        }
+
+      });
+
+      if (!consumerMode) {
+
+        const checkedPayment =
+          entry.querySelector(".catalog-payment:checked");
+
+        if (!checkedPayment || checkedPayment.value === "0") {
+
+          const commercialDefault =
+            entry.querySelector(".catalog-payment[value='3']");
+
+          if (commercialDefault) {
+            commercialDefault.checked = true;
+          }
+
+        }
+
+      }
+
+    }
+
+    function syncPaymentOptionsForCatalogType() {
+
+      const consumerMode =
+        isConsumerCatalog();
+
+      document
+        .querySelectorAll(".catalog-entry")
+        .forEach(entry => {
+
+          setPaymentOptionsForEntry(entry, consumerMode);
+
+        });
+
+      if (consumerMode) {
+        setCatalogStatus(
+          "Consumer catalog selected. Payment Cadence is fixed to None.",
+          "info"
+        );
+      }
+
+    }
+
+    function createCatalogEntry(copyValues = null) {
+
+      catalogEntryCounter++;
+
+      const paymentName =
+        `catalog_payment_${catalogEntryCounter}`;
+
+      const recurrenceName =
+        `catalog_recurrence_${catalogEntryCounter}`;
+
+      const consumerMode =
+        isConsumerCatalog();
+
+      const defaultPayment =
+        consumerMode
+          ? "0"
+          : (copyValues?.payment && copyValues.payment !== "0"
+              ? copyValues.payment
+              : "3");
+
+      const defaultRecurrence =
+        copyValues?.recurrence || "2";
+
+      const div =
+        document.createElement("div");
+
+      div.className =
+        "catalog-entry";
+
+      div.innerHTML = `
+
+        <div class="catalog-entry-fields-row">
+
+          <div class="input-wrap">
+            <label for="catalog-pid-${catalogEntryCounter}">PID</label>
+            <input
+              type="text"
+              class="catalog-pid catalog-text-input"
+              value="${escapeHtml(copyValues?.pid || "")}"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="CFQ7TTC0LCHC">
+          </div>
+
+          <div class="input-wrap">
+            <label for="catalog-skuid-${catalogEntryCounter}">SKU ID</label>
+            <input
+              type="text"
+              class="catalog-skuid catalog-text-input"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="001P">
+          </div>
+
+          <div class="input-wrap">
+            <label for="catalog-promoid-${catalogEntryCounter}">Promo ID (Optional)</label>
+            <input
+              type="text"
+              class="catalog-promoid catalog-text-input"
+              autocomplete="off"
+              spellcheck="false"
+              placeholder="39nfjqt1t8ls">
+          </div>
+
+        </div>
+
+        <div class="catalog-entry-options-row">
+
+          <div class="catalog-setting-card">
+            <span class="catalog-card-title">Payment Cadence</span>
+
+            <div class="catalog-option-list">
+
+              <label>
+                <input
+                  type="radio"
+                  name="${paymentName}"
+                  class="catalog-payment"
+                  value="0"
+                  ${defaultPayment === "0" ? "checked" : ""}>
+                None
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="${paymentName}"
+                  class="catalog-payment"
+                  value="1"
+                  ${defaultPayment === "1" ? "checked" : ""}>
+                Monthly
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="${paymentName}"
+                  class="catalog-payment"
+                  value="2"
+                  ${defaultPayment === "2" ? "checked" : ""}>
+                Annually
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="${paymentName}"
+                  class="catalog-payment"
+                  value="3"
+                  ${defaultPayment === "3" ? "checked" : ""}>
+                Annually (Show Monthly Price)
+              </label>
+
+            </div>
+          </div>
+
+          <div class="catalog-setting-card">
+            <span class="catalog-card-title">Recurrence Policy</span>
+
+            <div class="catalog-option-list">
+
+              <label>
+                <input
+                  type="radio"
+                  name="${recurrenceName}"
+                  class="catalog-recurrence"
+                  value="0"
+                  ${defaultRecurrence === "0" ? "checked" : ""}>
+                Perpetual
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="${recurrenceName}"
+                  class="catalog-recurrence"
+                  value="1"
+                  ${defaultRecurrence === "1" ? "checked" : ""}>
+                Monthly
+              </label>
+
+              <label>
+                <input
+                  type="radio"
+                  name="${recurrenceName}"
+                  class="catalog-recurrence"
+                  value="2"
+                  ${defaultRecurrence === "2" ? "checked" : ""}>
+                Yearly
+              </label>
+
+            </div>
+          </div>
+
+        </div>
+
+        <div class="catalog-remove-row">
+          <button
+            type="button"
+            class="secondary remove-entry-btn">
+            Remove Entry
+          </button>
+        </div>
+
+      `;
+
+      div
+        .querySelector(".remove-entry-btn")
+        .addEventListener("click", () => {
+
+          const entries =
+            catalogEntriesContainer.querySelectorAll(".catalog-entry");
+
+          if (entries.length > 1) {
+            div.remove();
+          } else {
+            setCatalogStatus(
+              "At least one catalog entry is required.",
+              "error"
+            );
+          }
+
+        });
+
+      catalogEntriesContainer.appendChild(div);
+
+      setPaymentOptionsForEntry(div, consumerMode);
+
+    }
+
+    function generateCatalogUrl() {
+
+      const output =
+        document.getElementById("catalogOutput");
+
+      const llcc =
+        document
+          .getElementById("catalogLlcc")
+          .value
+          .trim();
+
+      if (!llcc) {
+
+        setCatalogStatus(
+          "Please enter LL-CC.",
+          "error"
+        );
+
+        return "";
+
+      }
+
+      const catalogType =
+        getSelectedCatalogType();
+
+      const audienceType =
+        document.querySelector(
+          "input[name='audienceType']:checked"
+        )?.value || "0";
+
+      const consumerMode =
+        catalogType === "1";
+
+      const prefix =
+        `a${audienceType}c${catalogType}p0`;
+
+      const queryParts = [];
+
+      document
+        .querySelectorAll(".catalog-entry")
+        .forEach(entry => {
+
+          const pid =
+            entry
+              .querySelector(".catalog-pid")
+              .value
+              .trim();
+
+          const sku =
+            entry
+              .querySelector(".catalog-skuid")
+              .value
+              .trim();
+
+          const promo =
+            entry
+              .querySelector(".catalog-promoid")
+              .value
+              .trim();
+
+          if (!pid || !sku) return;
+
+          const payment =
+            consumerMode
+              ? "0"
+              : entry.querySelector(
+                  ".catalog-payment:checked"
+                )?.value || "3";
+
+          const recurrence =
+            entry.querySelector(
+              ".catalog-recurrence:checked"
+            )?.value || "2";
+
+          let item =
+            `${prefix}_pid${pid}_skuid${sku}_r${recurrence}p${payment}`;
+
+          if (promo) {
+            item += `_promoid${promo}`;
+          }
+
+          queryParts.push(item);
+
+        });
+
+      if (!queryParts.length) {
+
+        setCatalogStatus(
+          "Please enter at least one PID and SKU ID.",
+          "error"
+        );
+
+        return "";
+
+      }
+
+      const url =
+        `https://msonecloudapi-dev.azurewebsites.net/msonecloudapi/m365/product/price?v=4&llcc=${encodeURIComponent(llcc)}&q=${encodeURIComponent(queryParts.join(","))}`;
+
+      if (output) {
+        output.value = url;
+      }
+
+      resizeCatalogOutput();
+
+      setCatalogStatus(
+        `Generated URL with ${queryParts.length} catalog item(s).`,
+        "info"
+      );
+
+      return url;
+
+    }
+
+    if (!catalogEntriesContainer.children.length) {
+      createCatalogEntry();
+    }
+
+    document
+      .querySelectorAll("input[name='catalogType']")
+      .forEach(radio => {
+
+        radio.addEventListener("change", () => {
+
+          syncPaymentOptionsForCatalogType();
+
+        });
+
+      });
+
+    document
+      .getElementById("catalogAddEntryBtn")
+      ?.addEventListener("click", () => {
+
+        const entries =
+          catalogEntriesContainer.querySelectorAll(".catalog-entry");
+
+        let copyValues = null;
+
+        if (entries.length) {
+
+          const last =
+            entries[entries.length - 1];
+
+          copyValues = {
+
+            pid:
+              last.querySelector(".catalog-pid")
+                .value
+                .trim(),
+
+            payment:
+              isConsumerCatalog()
+                ? "0"
+                : last.querySelector(
+                    ".catalog-payment:checked"
+                  )?.value || "3",
+
+            recurrence:
+              last.querySelector(
+                ".catalog-recurrence:checked"
+              )?.value || "2"
+
+          };
+
+        }
+
+        createCatalogEntry(copyValues);
+
+      });
+
+    document
+      .getElementById("catalogGenerateBtn")
+      ?.addEventListener("click", () => {
+
+        generateCatalogUrl();
+
+      });
+
+    document
+      .getElementById("catalogCopyBtn")
+      ?.addEventListener("click", async () => {
+
+        const output =
+          document.getElementById("catalogOutput");
+
+        const url =
+          output?.value || generateCatalogUrl();
+
+        if (!url) return;
+
+        await navigator.clipboard.writeText(url);
+
+        setCatalogStatus(
+          "Catalog URL copied.",
+          "info"
+        );
+
+      });
+
+    document
+      .getElementById("catalogOpenBtn")
+      ?.addEventListener("click", () => {
+
+        const output =
+          document.getElementById("catalogOutput");
+
+        const url =
+          output?.value || generateCatalogUrl();
+
+        if (!url) return;
+
+        window.open(url, "_blank", "noopener,noreferrer");
+
+      });
+
+    document
+      .getElementById("catalogOutput")
+      ?.addEventListener("dblclick", () => {
+
+        const url =
+          document
+            .getElementById("catalogOutput")
+            .value;
+
+        if (!url) return;
+
+        window.open(url, "_blank", "noopener,noreferrer");
+
+      });
+
+    document
+      .getElementById("catalogClearBtn")
+      ?.addEventListener("click", () => {
+
+        document.getElementById("catalogLlcc").value = "";
+        document.getElementById("catalogOutput").value = "";
+
+        setCatalogStatus("");
+
+        catalogEntriesContainer.innerHTML = "";
+        createCatalogEntry();
+        resizeCatalogOutput();
+
+      });
+
+  }
+
+
+  function initCatalogToolboxUpdates() {
+
+    initUrlMakerTabs();
+    initCatalogUrlMaker();
+
+  }
+
+  if (document.readyState === "loading") {
+
+    document.addEventListener(
+      "DOMContentLoaded",
+      initCatalogToolboxUpdates
+    );
+
+  } else {
+
+    initCatalogToolboxUpdates();
+
+  }
+
+})();
 </script>
 
 <script>
 const BULK_PUBLISH_CODE="javascript:(function() {    let container = document.createElement(\"div\");    container.style.position = \"fixed\";    container.style.top = \"50%\";    container.style.left = \"50%\";    container.style.transform = \"translate(-50%, -50%)\";    container.style.background = \"white\";    container.style.padding = \"20px\";    container.style.boxShadow = \"0px 0px 10px rgba(0,0,0,0.5)\";    container.style.zIndex = \"9999\";    container.style.width = \"80%\";    container.style.maxWidth = \"400px\";    container.style.maxHeight = \"80vh\";    container.style.overflowY = \"auto\";    container.style.borderRadius = \"8px\";    let input = document.createElement(\"input\");    input.type = \"text\";    input.placeholder = \"Paste Microsoft.com or Azure.com URL\";    input.style.width = \"100%\";    input.style.marginBottom = \"10px\";    container.appendChild(input);    let locales = [\"ar\",\"bg-bg\",\"cs-cz\",\"de-at\",\"de-ch\",\"de-de\",\"da-dk\",\"el-gr\",\"en\",\"en-au\",\"en-ca\",\"en-gb\",\"en-ie\",\"en-in\",\"en-my\",\"en-nz\",\"en-sg\",\"en-za\",\"es\",\"es-ar\",\"es-cl\",\"es-co\",\"es-es\",\"es-mx\",\"et-ee\",\"fi-fi\",\"fr\",\"fr-be\",\"fr-ca\",\"fr-ch\",\"fr-fr\",\"he-il\",\"hr-hr\",\"hu-hu\",\"id-id\",\"it-it\",\"ja-jp\",\"ko-kr\",\"lt-lt\",\"lv-lv\",\"nb-no\",\"nl-be\",\"nl-nl\",\"pl-pl\",\"pt-br\",\"pt-pt\",\"ro-ro\",\"ru-ru\",\"sk-sk\",\"sl-si\",\"sr-rs\",\"sv-se\",\"th-th\",\"tr-tr\",\"uk-ua\",\"vi-vn\",\"zh-cn\",\"zh-hk\",\"zh-tw\"];    let acomLocales = [\"zh-cn\",\"zh-tw\",\"cs-cz\",\"da-dk\",\"nl-nl\",\"en-au\",\"en-ca\",\"en-in\",\"en-gb\",\"fr-ca\",\"fr-fr\",\"de-de\",\"hu-hu\",\"id-id\",\"it-it\",\"ja-jp\",\"ko-kr\",\"nb-no\",\"pl-pl\",\"pt-pt\",\"pt-br\",\"ru-ru\",\"es-mx\",\"es-es\",\"sv-se\",\"tr-tr\"];    let checkboxes = {};    function getSelectedLocales() {        return Object.keys(checkboxes).filter(locale => checkboxes[locale].checked);    }    function getUrlParts(rawValue) {        let value = rawValue.trim();        let basePath = \"\";        if (value.startsWith(\"https://www.microsoft.com\")) {            basePath = \"%2Fcontent%2Fmicrosoft%2Fbade%2F\";            value = value.replace(\"https://www.microsoft.com\", \"\");        } else if (value.startsWith(\"https://azure.microsoft.com\")) {            basePath = \"%2Fcontent%2Fazure%2Facom%2F\";            value = value.replace(\"https://azure.microsoft.com\", \"\");        } else {            return { error: \"URL must start with either https://www.microsoft.com or https://azure.microsoft.com\" };        }        return {            basePath,            value: value.replace(/\\//g, \"%2F\")        };    }    function buildWorkflowUrl() {        let parts = getUrlParts(input.value);        if (parts.error) {            return { error: parts.error };        }        let selectedLocales = getSelectedLocales();        if (!parts.value || selectedLocales.length === 0) {            return { error: \"Please enter a value and select at least one locale.\" };        }        let baseUrl = \"https://golf-author.adobeprod.microsoft.com/mnt/override/libs/wcm/core/content/common/startbulkworkflows.html\";        let params = selectedLocales.map(locale => `item=${parts.basePath}${locale}${parts.value}`).join(\"&\");        return {            url: `${baseUrl}?${params}`,            selectedCount: selectedLocales.length        };    }    function syncSelectAllCheckbox() {        let allSelected = locales.every(locale => checkboxes[locale].checked);        selectAllCheckbox.checked = allSelected;    }    let statusBar = document.createElement(\"div\");    statusBar.style.marginTop = \"10px\";    statusBar.style.fontSize = \"12px\";    statusBar.style.padding = \"8px\";    statusBar.style.borderRadius = \"4px\";    statusBar.style.background = \"#f3f3f3\";    statusBar.style.color = \"#222\";    function updateStatus() {        let result = buildWorkflowUrl();        if (result.error) {            statusBar.textContent = %60URL length: n/a (${result.error})%60;            statusBar.style.background = \"#f3f3f3\";            statusBar.style.color = \"#555\";            return;        }        let urlLength = result.url.length;        let isLong = urlLength > 8192;        statusBar.textContent = %60URL length: ${urlLength} characters (${result.selectedCount} markets selected)${isLong ? \" - may be too long\" : \"\"}%60;        statusBar.style.background = isLong ? \"#ffe6e6\" : \"#e8f5e9\";        statusBar.style.color = isLong ? \"#b00020\" : \"#1b5e20\";    }    let selectAllLabel = document.createElement(\"label\");    let selectAllCheckbox = document.createElement(\"input\");    selectAllCheckbox.type = \"checkbox\";    selectAllCheckbox.onclick = function() {        Object.values(checkboxes).forEach(cb => cb.checked = selectAllCheckbox.checked);        updateStatus();    };    selectAllLabel.appendChild(selectAllCheckbox);    selectAllLabel.appendChild(document.createTextNode(\" Select All Markets\"));    container.appendChild(document.createElement(\"br\"));    container.appendChild(selectAllLabel);    let selectionButtons = document.createElement(\"div\");    selectionButtons.style.display = \"flex\";    selectionButtons.style.gap = \"8px\";    selectionButtons.style.marginTop = \"8px\";    let invertButton = document.createElement(\"button\");    invertButton.textContent = \"Invert Selection\";    invertButton.onclick = function() {        locales.forEach(locale => {            checkboxes[locale].checked = !checkboxes[locale].checked;        });        syncSelectAllCheckbox();        updateStatus();    };    let selectAcomButton = document.createElement(\"button\");    selectAcomButton.textContent = \"Select ACOM Markets\";    selectAcomButton.onclick = function() {        locales.forEach(locale => {            checkboxes[locale].checked = acomLocales.includes(locale);        });        syncSelectAllCheckbox();        updateStatus();    };    selectionButtons.appendChild(invertButton);    selectionButtons.appendChild(selectAcomButton);    container.appendChild(selectionButtons);    let checkboxContainer = document.createElement(\"div\");    checkboxContainer.style.display = \"grid\";    checkboxContainer.style.gridTemplateColumns = \"1fr 1fr\";    checkboxContainer.style.gap = \"5px\";    checkboxContainer.style.marginTop = \"10px\";    locales.forEach(locale => {        let label = document.createElement(\"label\");        let checkbox = document.createElement(\"input\");        checkbox.type = \"checkbox\";        checkbox.value = locale;        checkbox.onchange = function() {            syncSelectAllCheckbox();            updateStatus();        };        checkboxes[locale] = checkbox;        label.appendChild(checkbox);        label.appendChild(document.createTextNode(\" \" + locale));        checkboxContainer.appendChild(label);    });    container.appendChild(checkboxContainer);    container.appendChild(statusBar);    let buttonContainer = document.createElement(\"div\");    buttonContainer.style.display = \"flex\";    buttonContainer.style.justifyContent = \"space-between\";    buttonContainer.style.marginTop = \"10px\";    let button = document.createElement(\"button\");    button.textContent = \"Create Publish Workflow\";    button.onclick = function() {        let result = buildWorkflowUrl();        if (result.error) {            alert(result.error);            return;        }        window.open(result.url, \"_blank\");        document.body.removeChild(container);    };    let closeButton = document.createElement(\"button\");    closeButton.textContent = \"Close\";    closeButton.onclick = function() {        document.body.removeChild(container);    };    input.addEventListener(\"input\", updateStatus);    buttonContainer.appendChild(button);    buttonContainer.appendChild(closeButton);    container.appendChild(buttonContainer);    document.body.appendChild(container);    updateStatus();})();";
 const XF_CODE="(async()=>{const CONTENT_ROOT=\"/content/microsoft/bade\";const AUTHOR=\"https://golf-author.adobeprod.microsoft.com\";const REF=\"/mnt/overlay/wcm/core/content/sites/jcr:content/rails/references/items/references.provider.html\";const BASE=\"en-us\",CMP=\"en-gb\",CONC=6;const canon=p=>{const i=p.indexOf(\"/content/experience-fragments/\");if(i>0)p=p.slice(i);return p.toLowerCase()};const PRICING_ROOTS=[\"/content/experience-fragments/microsoft/bade/en-us/product-price/\",\"/content/experience-fragments/microsoft/bade/en-us/security/enterprise/\",\"/content/experience-fragments/microsoft/bade/en-us/security/reimagine/\",\"/content/experience-fragments/microsoft/bade/en-us/security/smb-individual-products/\",\"/content/experience-fragments/microsoft/bade/en-us/security/smb-security-add-on-plans/\",\"/content/experience-fragments/microsoft/bade/en-us/security/enterprise-additional-products/\",\"/content/experience-fragments/microsoft/bade/en-us/security/smb-teams/\",\"/content/experience-fragments/microsoft/bade/en-us/security/smb-no-teams/\",\"/content/experience-fragments/microsoft/bade/en-us/security/security_pricing_ove/\",\"/content/experience-fragments/microsoft/bade/en-us/security/microsoft-entra-suite/\",\"/content/experience-fragments/microsoft/bade/en-us/security/microsoft-defender-pricing/\",\"/content/experience-fragments/microsoft/bade/en-us/security/microsoft-purview-pricing/\",\"/content/experience-fragments/microsoft/bade/en-us/security/microsoft-entra-id-p1/\",\"/content/experience-fragments/microsoft/bade/en-us/security/microsoft-intune-pricing/\",\"/content/experience-fragments/microsoft/bade/en-us/security/microsoft_entra_addi/\",\"/content/experience-fragments/microsoft/bade/en-us/dynamics_365/pay-as-you-go/\",\"/content/experience-fragments/microsoft/bade/en-us/dynamics_365/pre-purchase-plan/\",\"/content/experience-fragments/microsoft/bade/en-us/reimagine_shared_com/pricing/\"].map(x=>x.toLowerCase());const isPricing=path=>{const c=canon(path);return PRICING_ROOTS.some(root=>c.startsWith(root))};if(location.hostname.indexOf(\"golf-author\")===-1){alert(\"Please run this on the AEM author site (golf-author.adobeprod.microsoft.com) while logged in.\");return}const input=prompt(\"Paste a page URL (live, editor, or /content path):\",\"https://www.microsoft.com/en-us/microsoft-365/enterprise/microsoft-365-plans-and-pricing\");if(!input)return;const toContentPath=s=>{s=s.trim();if(s.indexOf(\"/content/\")===0)return s.replace(/\\.html.*$/,\"\");const m=s.match(/\\/content\\/[^\\s\"'?#]+/);if(m)return m[0].replace(/\\.html.*$/,\"\");try{const u=new URL(s);return CONTENT_ROOT+u.pathname.replace(/\\/+$/,\"\")}catch(e){}return CONTENT_ROOT+s.replace(/\\/+$/,\"\")};const parseXFs=html=>{const out=new Set(),re=/\\/content\\/[^\\s\"'<>\\)\\\\&]*?experience-fragments\\/[^\\s\"'<>\\)\\\\&]+/gi;let m;while((m=re.exec(html))!==null){let p=m[0];const i=p.indexOf(\"/master\");if(i!==-1)p=p.slice(0,i+7);out.add(p)}return[...out]};const getRefs=async path=>{const r=await fetch(%60${AUTHOR}${REF}?item=${encodeURIComponent(path)}&_=${Date.now()}%60,{credentials:\"include\"});if(!r.ok)return{ok:false,status:r.status,xfs:[]};const html=await r.text();if(/j_username|login\\.okta|microsoftonline/i.test(html)&&!/experience-fragments/.test(html))return{ok:false,login:true,xfs:[]};return{ok:true,xfs:parseXFs(html)}};const childPages=async path=>{try{const r=await fetch(%60${AUTHOR}${path}.1.json%60,{credentials:\"include\"});if(!r.ok)return[];const j=await r.json();const kids=[];for(const k in j){if(/^(jcr:|rep:|cq:)/.test(k))continue;const v=j[k];if(v&&typeof v===\"object\"&&v[\"jcr:primaryType\"]===\"cq:Page\")kids.push(path+\"/\"+k)}return kids}catch(e){return[]}};const swapLocale=(xf,t)=>xf.replace(new RegExp(\"(\\\\/experience-fragments\\\\/microsoft\\\\/bade\\\\/)\"+BASE+\"(\\\\/)\"),\"$1\"+t+\"$2\");const fmt=raw=>{if(!raw)return{str:\"\",date:null};const d=new Date(raw);if(isNaN(d))return{str:String(raw),date:null};const p=n=>String(n).padStart(2,\"0\");return{str:%60${d.getUTCFullYear()}-${p(d.getUTCMonth()+1)}-${p(d.getUTCDate())} ${p(d.getUTCHours())}:${p(d.getUTCMinutes())}:${p(d.getUTCSeconds())}%60,date:d}};const pickMod=j=>{if(!j||typeof j!==\"object\")return\"\";const c=j[\"jcr:content\"]||{};return c[\"cq:lastModified\"]||c[\"jcr:lastModified\"]||c[\"cq:lastReplicated\"]||j[\"jcr:created\"]||\"\"};const modOf=async xfPath=>{try{const r=await fetch(%60${AUTHOR}${encodeURI(xfPath)}.1.json%60,{credentials:\"include\"});if(!r.ok)return{raw:\"\",missing:true};const j=await r.json();return{raw:pickMod(j),missing:false}}catch(e){return{raw:\"\",missing:true}}};const editLink=xf=>%60${AUTHOR}/editor.html${xf}.html%60;const path=toContentPath(input);let res=await getRefs(path);let via=\"page\";if(res.login){alert(\"Your AEM session looks expired \u2014 reload AEM, log in, and try again.\");return}if(res.ok&&res.xfs.length===0){const kids=await childPages(path);if(kids.length){const agg=new Set();for(const kid of kids){const rr=await getRefs(kid);if(rr.ok)rr.xfs.forEach(x=>agg.add(x))}if(agg.size){res={ok:true,xfs:[...agg]};via=\"children(\"+kids.length+\")\"}}}if(!res.ok){alert(\"Could not read references (HTTP \"+(res.status||\"?\")+\"). Are you logged in?\");return}const rank=t=>t===\"Pricing XF\"?0:1;const xfs=res.xfs.map(xf=>({xf,type:isPricing(xf)?\"Pricing XF\":\"Others\"})).sort((a,b)=>rank(a.type)-rank(b.type)||(a.xf<b.xf?-1:a.xf>b.xf?1:0));const esc=s=>(s||\"\").replace(/[&<>\"]/g,c=>({\"&\":\"&amp;\",\"<\":\"&lt;\",\">\":\"&gt;\",'\"':\"&quot;\"}[c]));const w=window.open(\"\",\"_blank\");const trs=xfs.map((o,i)=>%60<tr id=\"r${i}\"><td class=\"n\">${i+1}</td><td class=\"${o.type===\"Pricing XF\"?\"tp\":\"to\"}\">${o.type}</td><td class=\"x\"><a href=\"${esc(editLink(o.xf))}\" target=\"_blank\" rel=\"noopener\">${esc(o.xf)}</a></td><td id=\"u${i}\">\u2026</td><td id=\"g${i}\">\u2026</td></tr>%60).join(\"\");w.document.write(%60<!doctype html><html><head><meta charset=\"utf-8\"><title>XFs (${xfs.length}) \u2014 ${esc(path.split(\"/\").pop())}</title><style>body{font:14px/1.5 Segoe UI,Arial;margin:18px;color:#1b1b1b}h2{margin:0 0 2px}small{color:#616161}.bar{margin:10px 0}button{font:14px Segoe UI;padding:7px 14px;margin-right:8px;cursor:pointer;border:1px solid #8a8886;border-radius:4px;background:#0067b8;color:#fff}button.sec{background:#fff;color:#1b1b1b}table{border-collapse:collapse;width:100%;margin-top:8px}th,td{border:1px solid #e1dfdd;padding:6px 8px;text-align:left;vertical-align:top}th{background:#f3f2f1;position:sticky;top:0;cursor:pointer}td.n{color:#a19f9d;width:36px}td.x{font:12px Consolas,monospace;word-break:break-all}td.x a{color:#0067b8;text-decoration:none}td.x a:hover{text-decoration:underline}td.tp{color:#107c10;font-weight:600;white-space:nowrap}td.to{color:#616161;white-space:nowrap}td.stale{background:#f8d7da;color:#a4262c;font-weight:600}td.miss{background:#fff4ce;color:#8a6d00}.sw{display:inline-block;width:12px;height:12px;border:1px solid #ccc;vertical-align:middle;margin-right:4px}.legend span{margin-right:14px}#prog{color:#0067b8;font-weight:600}</style></head><body><h2>${xfs.length} XF(s) on this page</h2><small>Page: ${esc(path)} \u00b7 via ${via} \u00b7 <span id=\"prog\">loading dates 0/${xfs.length}\u2026</span> \u00b7 <b style=\"color:#a4262c\" id=\"sc\">0</b> en-gb older \u00b7 <span id=\"mc\">0</span> en-gb missing</small><div class=\"bar\"><button onclick=\"var v=window.__priceList();if(!v){this.textContent='No Pricing XF';return;}var t=document.createElement('textarea');t.value=v;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();this.textContent='Copied \u2713';\">Copy Pricing XF list</button><button class=\"sec\" onclick=\"window.print()\">Print / Save PDF</button><span class=\"legend\"><span><span class=\"sw\" style=\"background:#f8d7da\"></span>en-gb older</span><span><span class=\"sw\" style=\"background:#fff4ce\"></span>en-gb missing</span></span></div><table id=\"t\"><thead><tr><th>#</th><th onclick=\"__sort(1)\">Type</th><th onclick=\"__sort(2)\">fragmentVariationPath</th><th onclick=\"__sort(3)\">en-us modified</th><th onclick=\"__sort(4)\">en-gb modified</th></tr></thead><tbody>${trs}</tbody></table><script>window.__sort=function(c){var tb=document.querySelector('#t tbody');var rs=[].slice.call(tb.rows);var asc=tb.getAttribute('d')!=('a'+c);tb.setAttribute('d',asc?('a'+c):'');rs.sort(function(a,b){var x=a.cells[c].innerText,y=b.cells[c].innerText;return asc?(x>y?1:x<y?-1:0):(x<y?1:x>y?-1:0);});rs.forEach(function(r){tb.appendChild(r);});};window.__priceList=function(){var out=[];var tb=document.querySelector('#t tbody');[].slice.call(tb.rows).forEach(function(r){if(r.cells[1].innerText.trim()==='Pricing XF'){out.push(r.cells[2].innerText.trim());}});return out.join('\\\\n');};<\\/script></body></html>%60);w.document.close();const D=w.document;let done=0,stale=0,miss=0;const setCell=(id,text,cls)=>{const el=D.getElementById(id);if(!el)return;el.textContent=text;if(cls)el.className=cls};const bump=()=>{const p=D.getElementById(\"prog\");if(p)p.textContent=%60loading dates ${done}/${xfs.length}%60+(done===xfs.length?\" \u2713 done\":\"\u2026\");const s=D.getElementById(\"sc\");if(s)s.textContent=stale;const mm=D.getElementById(\"mc\");if(mm)mm.textContent=miss};const work=xfs.map((o,i)=>async()=>{const xf=o.xf,usPath=swapLocale(xf,BASE),gbPath=swapLocale(xf,CMP);const[us,gb]=await Promise.all([modOf(usPath),gbPath!==usPath?modOf(gbPath):Promise.resolve({raw:\"\",missing:true})]);const fu=fmt(us.raw),fg=fmt(gb.raw);setCell(\"u\"+i,fu.str||\"\u2014\");if(!fu.date){setCell(\"g\"+i,fg.str||\"\u2014\")}else if(gb.missing||!fg.date){setCell(\"g\"+i,\"(not found)\",\"miss\");miss++}else if(fg.date<fu.date){setCell(\"g\"+i,fg.str,\"stale\");stale++}else{setCell(\"g\"+i,fg.str)}done++;bump()});let idx=0;const runners=Array.from({length:Math.min(CONC,work.length)},async()=>{while(idx<work.length){const j=idx++;await work[j]()}});await Promise.all(runners)})();";
 const PAGE_INFO_CODE="(async () => {\n  const AUTHOR = 'https://golf-author.adobeprod.microsoft.com';\n  const SITE_TYPE_LABEL = {bade:'BADE',acom:'ACOM',ai:'AI',commercial:'Commercial',dynamics365:'Dynamics 365',enterprise:'Enterprise',healthcarecloud:'Healthcare Cloud',hololens:'Hololens',powerplatform:'Power Platform',project:'Project',sqlserver:'SQL SERVER',visio:'Visio',w365:'Windows 365',windowsserver:'Windows Server',security:'Security',m365frontlineworker:'M365 Frontline Worker',microsoftfabric:'Microsoft Fabric',microsoftviva:'Microsoft Viva',microsoftteams:'Microsoft Teams',securitydefender:'Security Defender',securitypurview:'Security Purview',securitymddb:'Security MDDB',securityazure:'Security Azure'};\n  if (location.hostname.indexOf('golf-author') === -1) { alert('Please run this on the AEM author site (golf-author.adobeprod.microsoft.com) while logged in.'); return; }\n  const input = prompt('Paste a live URL, AEM preview URL, or AEM authoring URL:', 'https://www.microsoft.com/en-us/microsoft-365');\n  if (!input) return;\n  const esc = s => (s || '').replace(/[&<>\\\"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));\n  const isLoc = s => /^[a-z]{2}-[a-z]{2}$/i.test(s || '');\n  const stripHtml = p => p.replace(/\\.html.*$/i, '');\n  const normUrl = u => { try { const raw = u || ''; const url = new URL(raw); url.hash=''; url.pathname=url.pathname.replace(/\\/(en-us|en-gb)(?=\\/|$)/i,'/{locale}'); if(url.hostname.toLowerCase()==='go.microsoft.com' && url.pathname.toLowerCase().includes('fwlink')){ let linkId=''; url.searchParams.forEach((v,k)=>{ if(!linkId && k.toLowerCase()==='linkid'){ const m=String(v).match(/^(\\d+)/); linkId=m?m[1]:String(v); } }); if(linkId) return ('https://go.microsoft.com/fwlink/?linkid='+linkId).toLowerCase(); } return (url.origin+url.pathname+(url.searchParams.toString() ? '?' + url.searchParams.toString() : '')).toLowerCase(); } catch(e) { return (u || '').replace(/#.*$/, '').replace(/\\/$/, '').replace(/\\/(en-us|en-gb)(?=\\/|$)/i, '/{locale}').toLowerCase(); } };\n  const inputInfo = raw => {\n    raw = raw.trim();\n    let sourceKind = 'path', originalUrl = '';\n    const makeFromPath = p => ({ path: stripHtml(p.split('?')[0]), sourceKind, originalUrl });\n    if (raw.startsWith('/content/')) return makeFromPath(raw);\n    try {\n      const u = new URL(raw);\n      originalUrl = u.href;\n      const h = u.hostname.toLowerCase();\n      if (h === 'www.microsoft.com' || h === 'microsoft.com') {\n        sourceKind = 'live';\n        const parts = u.pathname.split('/').filter(Boolean); if (!isLoc(parts[0])) parts.unshift('en-us');\n        return { path:'/content/microsoft/bade/' + parts.join('/'), sourceKind, originalUrl:u.href };\n      }\n      if (h === 'azure.microsoft.com') {\n        sourceKind = 'live';\n        const parts = u.pathname.split('/').filter(Boolean); if (!isLoc(parts[0])) parts.unshift('en-us');\n        return { path:'/content/azure/acom/' + parts.join('/'), sourceKind, originalUrl:u.href };\n      }\n      if (h.includes('adobeprod.microsoft.com')) {\n        sourceKind = u.pathname.startsWith('/content/') ? 'preview' : 'authoring';\n        if (u.pathname.includes('/mnt/overlay/wcm/core/content/sites/properties.html')) { const item = u.searchParams.get('item'); if(item) return { path:stripHtml(item), sourceKind:'properties', originalUrl:u.href }; }\n        return { path: stripHtml(decodeURIComponent(u.pathname).replace(/^\\/editor\\.html/, '').replace(/^\\/sites\\.html/, '')), sourceKind, originalUrl:u.href };\n      }\n    } catch(e) {}\n    return { path:'/content/microsoft/bade/' + raw.replace(/^\\/+|\\/+$/g, ''), sourceKind:'path', originalUrl:'' };\n  };\n  const liveFromPath = p => p.includes('/content/microsoft/bade/') ? 'https://www.microsoft.com/' + p.split('/content/microsoft/bade/')[1] : p.includes('/content/azure/acom/') ? 'https://azure.microsoft.com/' + p.split('/content/azure/acom/')[1] : '';\n  const previewFromPath = p => `${AUTHOR}${p}.html?wcmmode=disabled&_=${Date.now()}`;\n  const fetchText = async url => { const r = await fetch(url, { credentials:'include' }); if (!r.ok) throw new Error('HTTP ' + r.status + ' for ' + url); return await r.text(); };\n  const canonicalFrom = (html, base) => { let m = html.match(/<link[^>]+rel=[\"']canonical[\"'][^>]*href=[\"']([^\"']+)[\"']/i) || html.match(/<link[^>]+href=[\"']([^\"']+)[\"'][^>]*rel=[\"']canonical[\"']/i); if (m && m[1]) { try { return new URL(m[1], base).href; } catch(e) { return m[1]; } } const d = new DOMParser().parseFromString(html,'text/html'); const el = d.querySelector('link[rel=\"canonical\"],link[rel=\"Canonical\"]'); return el ? el.getAttribute('href') || '' : ''; };\n  const info = inputInfo(input);\n  const enPath = info.path;\n  const gbPath = enPath.replace('/en-us/', '/en-gb/');\n  const pageLiveUrl = liveFromPath(enPath);\n  const canonicalSourceUrl = info.sourceKind === 'live' && info.originalUrl ? info.originalUrl : (info.sourceKind === 'preview' && info.originalUrl ? info.originalUrl : previewFromPath(enPath));\n  const canonicalSourceType = info.sourceKind === 'live' ? 'Public input URL' : (info.sourceKind === 'preview' ? 'AEM preview input URL' : 'AEM preview converted from input');\n  let html = '', canonical = '';\n  try { html = await fetchText(previewFromPath(enPath)); } catch(e) { alert('Could not read AEM preview page. ' + e.message); return; }\n  try {\n    const canonicalHtml = await fetchText(canonicalSourceUrl);\n    canonical = canonicalFrom(canonicalHtml, canonicalSourceUrl);\n    if (!canonical && info.sourceKind === 'live') canonical = pageLiveUrl || info.originalUrl;\n    if (!canonical) canonical = canonicalFrom(html, previewFromPath(enPath));\n  } catch(e) {\n    canonical = info.sourceKind === 'live' ? (pageLiveUrl || info.originalUrl) : canonicalFrom(html, previewFromPath(enPath));\n  }\n  const doc = new DOMParser().parseFromString(html,'text/html');\n  const pageTitle = (doc.querySelector('title') || {}).textContent || '';\n  const pageDesc = (doc.querySelector('meta[name=\"description\"],meta[property=\"og:description\"]') || {}).content || '';\n  let siteType = '';\n  try {\n    const chatOptsMeta = doc.querySelector('meta[name=\"chat-oc-opts\"]');\n    const chatOptsRaw = chatOptsMeta ? (chatOptsMeta.getAttribute('value') || chatOptsMeta.getAttribute('content') || '') : '';\n    if (chatOptsRaw) {\n      try { const chatOpts = JSON.parse(chatOptsRaw); siteType = (chatOpts && chatOpts.siteType) || ''; }\n      catch(e) { const m = chatOptsRaw.match(/\"siteType\"\s*:\s*\"([^\"]*)\"/i); if (m) siteType = m[1]; }\n    }\n    siteType = SITE_TYPE_LABEL[siteType] || siteType || '';\n  } catch(e) {}\n  if (!siteType) {\n    try { const j = await (await fetch(`${AUTHOR}${enPath}/jcr:content.infinity.json?_=${Date.now()}`, {credentials:'include'})).json(); const v = (j && j.siteType) || ''; siteType = SITE_TYPE_LABEL[v] || v || ''; } catch(e) {}\n  }\n  const first = (txt,arr) => { for(const re of arr){ const m=txt.match(re); if(m&&m[1]) return m[1]; } return ''; };\n  let partnerId = first(html, [/partnerId[\"'\\s:=]+[\"']([^\"']+)/i,/data-partner-id=[\"']([^\"']+)/i,/\"partnerId\"\\s*:\\s*\"([^\"]+)\"/i]);\n  let headerId = first(html, [/headerId[\"'\\s:=]+[\"']([^\"']+)/i,/data-header-id=[\"']([^\"']+)/i,/\"headerId\"\\s*:\\s*\"([^\"]+)\"/i]);\n  let footerId = first(html, [/footerId[\"'\\s:=]+[\"']([^\"']+)/i,/data-footer-id=[\"']([^\"']+)/i,/\"footerId\"\\s*:\\s*\"([^\"]+)\"/i]);\n  const cleanFootprintValue = v => (v || '').replace(/,\\s*fromService\\s*:\\s*(True|False)/i,'').trim();\n  const footprintParts = v => cleanFootprintValue(v).replace(/^\\/+/, '').split('/').filter(Boolean);\n  if (!partnerId || !headerId) {\n    const headerFootprint = first(html, [/data-header-footprint=[\"']([^\"']+)[\"']/i]);\n    const hp = footprintParts(headerFootprint);\n    if (!partnerId && hp[0]) partnerId = hp[0];\n    if (!headerId && hp[1]) headerId = hp[1];\n  }\n  if (!footerId) {\n    const footerFootprint = first(html, [/data-footer-footprint=[\"']([^\"']+)[\"']/i]);\n    const fp = footprintParts(footerFootprint);\n    if (fp[1]) footerId = fp[1];\n  }\n  const uhfSelectors = ['header','footer','nav','[role=\"banner\"]','[role=\"contentinfo\"]','#uhfHeader','#uhfFooter','[id*=\"uhf\" i]','[class*=\"uhf\" i]','[id*=\"footer\" i]','[class*=\"footer\" i]','[id*=\"header\" i]','[data-bi-area*=\"header\" i]','[data-bi-area*=\"footer\" i]','[data-m*=\"header\" i]','[data-m*=\"footer\" i]','[aria-label*=\"footer\" i]','[aria-label*=\"header\" i]'];\n  const extractLinks = (pageHtml, pageBase) => {\n    const d = new DOMParser().parseFromString(pageHtml,'text/html'); const clone = d.body ? d.body.cloneNode(true) : d.cloneNode(true);\n    clone.querySelectorAll(uhfSelectors.join(',')).forEach(n=>n.remove());\n    const root = clone.querySelector('main,[role=\"main\"],#mainContent,#main-content,.main') || clone;\n    const baseNorm = normUrl(pageBase); const out=[];\n    const abs = href => { try { if((href||'').startsWith('#')) return pageBase.replace(/#.*$/, '') + href; return new URL(href, pageBase).href; } catch(e) { return ''; } };\n    const classify = url => { let u; try{u=new URL(url);}catch(e){return '';} const host=u.hostname.toLowerCase(), path=u.pathname.toLowerCase(), full=url.toLowerCase(); if(host==='go.microsoft.com'&&full.includes('fwlink'))return 'FWLINK'; if(host==='aka.ms'||host.endsWith('.aka.ms'))return 'AKA Link'; if(u.hash && normUrl(url)===baseNorm)return 'In-Page Link'; if(host==='golf-author.adobeprod.microsoft.com'&&(path.startsWith('/content/')||path.startsWith('/editor.html/content/')||path.startsWith('/sites.html/content/')))return 'In-Page Link'; return 'General Link'; };\n    root.querySelectorAll('a[href]').forEach(a=>{ if(a.closest(uhfSelectors.join(',')))return; const raw=(a.getAttribute('href')||'').trim(); if(!raw||/^javascript:/i.test(raw)||/^mailto:/i.test(raw)||/^tel:/i.test(raw))return; const url=abs(raw); if(!/^https?:/i.test(url))return; out.push({type:classify(url), text:(a.textContent||a.getAttribute('aria-label')||a.getAttribute('title')||'').replace(/\\s+/g,' ').trim(), url}); });\n    const order={'General Link':0,'FWLINK':1,'AKA Link':2,'In-Page Link':3}; return out.sort((a,b)=>order[a.type]-order[b.type]||a.url.localeCompare(b.url));\n  };\n  const enPageBase = info.sourceKind === 'preview' && info.originalUrl ? info.originalUrl : (pageLiveUrl || previewFromPath(enPath));\n  const gbPageBase = info.sourceKind === 'preview' ? previewFromPath(gbPath) : (liveFromPath(gbPath) || previewFromPath(gbPath));\n  const enLinks = extractLinks(html, enPageBase);\n  let gbHtml = '', gbLinks = [];\n  try { gbHtml = await fetchText(previewFromPath(gbPath)); gbLinks = extractLinks(gbHtml, gbPageBase); } catch(e) { gbLinks = []; }\n  let gbTitle='', gbDesc='';\n  try { const gbDoc = new DOMParser().parseFromString(gbHtml,'text/html'); gbTitle = (gbDoc.querySelector('title') || {}).textContent || ''; gbDesc = (gbDoc.querySelector('meta[name=\"description\"],meta[property=\"og:description\"]') || {}).content || ''; } catch(e) {}\n  const counts = {}; enLinks.forEach(l=>{ const k=normUrl(l.url); counts[k]=(counts[k]||0)+1; });\n  const colors=['#fff4ce','#dff6dd','#deecf9','#f3e5f5','#fde7e9','#e5f4fb','#fce4d6','#e2f0d9']; const dupKeys=Object.keys(counts).filter(k=>counts[k]>1); const colorMap={}; dupKeys.forEach((k,i)=>colorMap[k]=colors[i%colors.length]);\n  const fwlinks=enLinks.filter(l=>l.type==='FWLINK').map(l=>l.url); const uniqueFwlinks=[...new Set(fwlinks)]; const fwlinkIdFromUrl=u=>{try{const url=new URL(u);let id='';url.searchParams.forEach((v,k)=>{if(!id&&k.toLowerCase()==='linkid'){const m=String(v).match(/^(\\d+)/);id=m?m[1]:String(v);}});return id;}catch(e){const m=String(u||'').match(/[?&]linkid=(\\d+)/i);return m?m[1]:'';}}; const uniqueFwlinkIds=[...new Set(uniqueFwlinks.map(fwlinkIdFromUrl).filter(Boolean))]; const publicLinks=enLinks.filter(l=>l.type==='General Link'||l.type==='FWLINK'||l.type==='AKA Link').map(l=>l.url); const countType=t=>enLinks.filter(l=>l.type===t).length;\n  const cleanCanon = u => (u || '').replace(/#.*$/, '').replace(/\\/$/, '').toLowerCase();\n  const liveCanonNorm = cleanCanon(pageLiveUrl);\n  const canonicalNorm = cleanCanon(canonical);\n  let canonicalValidationStatus = 'PASS';\n  let canonicalValidationDetails = 'Expected canonical relationship is valid.';\n  if (info.sourceKind === 'live' && liveCanonNorm !== canonicalNorm) {\n    canonicalValidationStatus = 'WARNING';\n    canonicalValidationDetails = 'Public URL input but Canonical URL does not match Page Live URL.';\n  } else if (info.sourceKind === 'preview' && liveCanonNorm === canonicalNorm) {\n    canonicalValidationStatus = 'WARNING';\n    canonicalValidationDetails = 'AEM preview URL input but Canonical URL matches Page Live URL.';\n  }\n  const canonicalWarn = canonicalValidationStatus === 'WARNING';\n  const displayTextMap={}; const displayUrlMap={}; enLinks.forEach(l=>{const k=normUrl(l.url); if(!displayTextMap[k]&&l.text) displayTextMap[k]=l.text; if(!displayUrlMap[k]&&l.url) displayUrlMap[k]=l.url;}); gbLinks.forEach(l=>{const k=normUrl(l.url); if(!displayTextMap[k]&&l.text) displayTextMap[k]=l.text; if(!displayUrlMap[k]&&l.url) displayUrlMap[k]=l.url;}); const enSet=new Set(enLinks.map(l=>normUrl(l.url))); const gbSet=new Set(gbLinks.map(l=>normUrl(l.url))); const missingGb=[...enSet].filter(x=>!gbSet.has(x)); const missingEn=[...gbSet].filter(x=>!enSet.has(x)); const matching=[...enSet].filter(x=>gbSet.has(x));\n  const rows=enLinks.map((l,i)=>{const k=normUrl(l.url); const bg=colorMap[k]?` style=\"background:${colorMap[k]}\"`:'';return `<tr${bg}><td>${i+1}</td><td>${esc(l.type)}</td><td>${esc(l.text||'(no text)')}</td><td><a href=\"${esc(l.url)}\" target=\"_blank\" rel=\"noopener\">${esc(l.url)}</a></td><td>${counts[k]}</td></tr>`;}).join('');\n  const metaNorm = v => (v || '').replace(/\\s+/g,' ').trim();\n  const titleMatch = metaNorm(pageTitle) === metaNorm(gbTitle);\n  const descMatch = metaNorm(pageDesc) === metaNorm(gbDesc);\n  const badge = (ok, text) => `<span style=\"display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;${ok?'background:#dff6dd;color:#107c10;border:1px solid #9fd89f;':'background:#fde7e9;color:#a4262c;border:1px solid #f3b7bd;'}\">${text}</span>`;\n  const pageTitleLabel = `Page Title (${badge(titleMatch, titleMatch ? 'en-us=en-gb' : 'en-us≠en-gb')})`;\n  const pageDescLabel = `Page Description (${badge(descMatch, descMatch ? 'en-us=en-gb' : 'en-us≠en-gb')})`;\n  const canonicalResultLabel = canonicalWarn ? 'Fail' : 'Pass';\n  const canonicalBadgeStyle = canonicalWarn ? 'background:#fde7e9;color:#a4262c;border:1px solid #f3b7bd;' : 'background:#dff6dd;color:#107c10;border:1px solid #9fd89f;';\n  const canonicalLabelHtml = `Canonical URL (<span style=\"display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;${canonicalBadgeStyle}\">${canonicalResultLabel}</span>)`;\n  const metaRows=[['Page live URL',pageLiveUrl],['Canonical URL',canonical],['Canonical Source Type',canonicalSourceType],['__PAGE_TITLE__',pageTitle],['__PAGE_DESC__',pageDesc],['Site Type',siteType],['Partner ID',partnerId],['Header ID',headerId],['Footer ID',footerId],['Total Links',String(enLinks.length)],['General Links',String(countType('General Link'))],['FWLINKs',String(countType('FWLINK'))],['AKA Links',String(countType('AKA Link'))],['In-Page Links',String(countType('In-Page Link'))],['Duplicate Links',String(dupKeys.length)]];\n  const meta=metaRows.map(r=>{const rowStyle = canonicalWarn && r[0] === 'Canonical URL' ? ' style=\"background:#fff4f4\"' : ''; const label = r[0] === 'Canonical URL' ? canonicalLabelHtml : (r[0] === '__PAGE_TITLE__' ? pageTitleLabel : (r[0] === '__PAGE_DESC__' ? pageDescLabel : esc(r[0]))); const cell = r[0].includes('URL')&&r[1]?`<a href=\"${esc(r[1])}\" target=\"_blank\" rel=\"noopener\">${esc(r[1])}</a>`:esc(r[1]||''); return `<tr${rowStyle}><th>${label}</th><td>${cell}</td></tr>`;}).join('');\n  const compRows=[...missingGb.map(x=>['Missing in en-gb',displayTextMap[x]||'(no text)',displayUrlMap[x]||x]),...missingEn.map(x=>['Missing in en-us',displayTextMap[x]||'(no text)',displayUrlMap[x]||x])].map((r,i)=>`<tr><td>${i+1}</td><td>${esc(r[0])}</td><td>${esc(r[1])}</td><td>${esc(r[2])}</td></tr>`).join('') || '<tr><td colspan=\"4\">No missing links after ignoring locale code and FWLINK tracking parameters.</td></tr>';\n  const w=window.open('','_blank'); w.document.write(`<!doctype html><html><head><meta charset=\"utf-8\"><title>Page Basic Info \u2014 ${esc(pageTitle||enPath.split('/').pop())}</title><style>body{font:14px/1.5 Segoe UI,Arial;margin:18px;color:#1b1b1b}h2{margin:0 0 4px}.bar{margin:12px 0}button{font:14px Segoe UI;padding:7px 14px;margin-right:8px;cursor:pointer;border:1px solid #8a8886;border-radius:4px;background:#0067b8;color:#fff}button.sec{background:#fff;color:#1b1b1b}table{border-collapse:collapse;width:100%;margin-top:10px}th,td{border:1px solid #e1dfdd;padding:6px 8px;text-align:left;vertical-align:top}th{background:#f3f2f1}td a{color:#0067b8;text-decoration:none;word-break:break-all}.meta th{width:180px}.links td:nth-child(4){font:12px Consolas,monospace;word-break:break-all}.note{color:#616161}</style></head><body><h2>Page Basic Info</h2><div class=\"note\">Source path: ${esc(enPath)} \u00b7 Canonical source type: ${esc(canonicalSourceType)} · Canonical source: ${esc(canonicalSourceUrl)} \u00b7 en-gb path: ${esc(gbPath)}</div><div class=\"bar\"><button onclick=\"copyFwlinks(this)\">Copy FWLINK</button><label style=\"display:inline-flex;align-items:center;gap:4px;margin-right:8px;font-size:13px;color:#616161;\"><input id=\"dedupeFwlinks\" type=\"checkbox\" checked>Deduplicate FWLINKs</label><button onclick=\"copyList(FWLINK_IDS,this,'Copied FWLINK IDs \u2713','No FWLINK IDs')\">Copy FWLINK IDs</button><button onclick=\"copyList(PUBLICLINKS,this,'Copied public links \u2713','No public links')\">Copy all public links</button><button class=\"sec\" onclick=\"window.print()\">Print / Save PDF</button></div><h3>Page metadata</h3><table class=\"meta\"><tbody>${meta}</tbody></table><h3>Link comparison: en-us vs en-gb (locale ignored)</h3><div class=\"note\">EN-US links: ${enLinks.length} \u00b7 EN-GB links: ${gbLinks.length} \u00b7 Matching: ${matching.length} \u00b7 Missing in en-gb: ${missingGb.length} \u00b7 Missing in en-us: ${missingEn.length}</div><table><thead><tr><th>#</th><th>Status</th><th>Display Text</th><th>Normalized Link</th></tr></thead><tbody>${compRows}</tbody></table><h3>Hyperlinks excluding UHF/header/footer</h3><table class=\"links\"><thead><tr><th>#</th><th>Type</th><th>Display text</th><th>Hyperlink</th><th>Duplicate Count</th></tr></thead><tbody>${rows||'<tr><td colspan=\"5\">No links found.</td></tr>'}</tbody></table><script>const FWLINKS=${JSON.stringify(fwlinks)};const UNIQUE_FWLINKS=${JSON.stringify(uniqueFwlinks)};const FWLINK_IDS=${JSON.stringify(uniqueFwlinkIds)};const PUBLICLINKS=${JSON.stringify(publicLinks)};function copyFwlinks(btn){var toggle=document.getElementById('dedupeFwlinks');var arr=toggle&&toggle.checked?UNIQUE_FWLINKS:FWLINKS;copyList(arr,btn,toggle&&toggle.checked?'Copied unique FWLINKs \u2713':'Copied FWLINKs \u2713','No FWLINKs');}function copyList(arr,btn,ok,empty){if(!arr.length){btn.textContent=empty;return;}var t=document.createElement('textarea');t.value=arr.join('\\\\n');document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();btn.textContent=ok;}<\\/script></body></html>`); w.document.close();\n})();";
-const PAGE_SIZE_CODE="(async()=>{\n  const AUTHOR='https://golf-author.adobeprod.microsoft.com';\n  const MAX_KB=1024;\n  const CONCURRENCY=5;\n  const LIVE_MARKETS={\n    azure:['cs-cz','da-dk','de-de','en-au','en-ca','en-gb','en-in','es-es','es-mx','fr-ca','fr-fr','hu-hu','id-id','it-it','ja-jp','ko-kr','nb-no','nl-nl','pl-pl','pt-br','pt-pt','ru-ru','sv-se','tr-tr','zh-cn','zh-tw'],\n    evalcenter:['de-de','en-gb','en-in','es-es','es-mx','fr-fr','ja-jp','ko-kr','it-it','pt-br','ru-ru','zh-cn','zh-tw'],\n    businessApps:['ar','cs-cz','da-dk','de-at','de-ch','de-de','el-gr','en','en-au','en-ca','en-gb','en-ie','en-in','en-my','en-nz','en-sg','en-za','es','es-ar','es-cl','es-co','es-es','es-mx','fi-fi','fr','fr-be','fr-ca','fr-ch','fr-fr','he-il','hu-hu','it-it','ja-jp','ko-kr','nb-no','nl-be','nl-nl','pl-pl','pt-br','pt-pt','ru-ru','sv-se','th-th','tr-tr','zh-cn','zh-hk','zh-tw'],\n    default:['ar','bg-bg','cs-cz','da-dk','de-at','de-ch','de-de','el-gr','en','en-au','en-ca','en-gb','en-ie','en-in','en-my','en-nz','en-sg','en-za','es','es-ar','es-cl','es-co','es-es','es-mx','et-ee','fi-fi','fr','fr-be','fr-ca','fr-ch','fr-fr','he-il','hr-hr','hu-hu','id-id','it-it','ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-be','nl-nl','pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk','sl-si','sr-latn-rs','sv-se','th-th','tr-tr','uk-ua','vi-vn','zh-cn','zh-hk','zh-tw']\n  };\n  if(location.hostname.indexOf('golf-author')===-1){alert('Please run this on the AEM author site (golf-author.adobeprod.microsoft.com) while logged in.');return;}\n  const input=prompt('Paste a live URL, AEM preview URL, AEM authoring URL, or /content path:',location.href);\n  if(!input)return;\n  const esc=s=>(s||'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));\n  const isLoc=s=>/^[a-z]{2}-[a-z]{2}$/i.test(s||'');\n  const stripHtml=p=>(p||'').replace(/\\.html.*$/i,'');\n  const fromPath=(path,inputType)=>{\n    const clean=stripHtml(path).split('?')[0];\n    const parts=clean.split('/').filter(Boolean);\n    let root='',rest=[],siteKey='default',siteName='Default www.microsoft.com';\n    if(clean.startsWith('/content/microsoft/bade/')){root='/content/microsoft/bade';rest=parts.slice(4);}\n    else if(clean.startsWith('/content/azure/acom/')){root='/content/azure/acom';rest=parts.slice(4);siteKey='azure';siteName='Azure';}\n    const first=(rest[0]||'').toLowerCase();\n    if(root==='/content/microsoft/bade'){\n      if(first==='evalcenter'){siteKey='evalcenter';siteName='Eval Center';}\n      else if(first==='dynamics-365'||first==='power-platform'){siteKey='businessApps';siteName=first==='dynamics-365'?'Dynamics 365':'Power Platform';}\n    }\n    return{path:clean,root,rest,inputType,siteKey,siteName};\n  };\n  const inputInfo=raw=>{\n    raw=(raw||'').trim();\n    if(raw.startsWith('/content/'))return fromPath(raw,'AEM content path');\n    try{\n      const u=new URL(raw);const h=u.hostname.toLowerCase();\n      if(h==='www.microsoft.com'||h==='microsoft.com'){\n        const parts=u.pathname.split('/').filter(Boolean);if(!isLoc(parts[0]))parts.unshift('en-us');\n        return fromPath('/content/microsoft/bade/'+parts.join('/'),'Public www.microsoft.com URL');\n      }\n      if(h==='azure.microsoft.com'){\n        const parts=u.pathname.split('/').filter(Boolean);if(!isLoc(parts[0]))parts.unshift('en-us');\n        return fromPath('/content/azure/acom/'+parts.join('/'),'Public azure.microsoft.com URL');\n      }\n      if(h.includes('adobeprod.microsoft.com')){\n        if(u.pathname.includes('/mnt/overlay/wcm/core/content/sites/properties.html')){const item=u.searchParams.get('item');if(item)return fromPath(item,'AEM properties URL');}\n        const p=decodeURIComponent(u.pathname).replace(/^\\/editor\\.html/,'').replace(/^\\/sites\\.html/,'');\n        return fromPath(p,u.pathname.startsWith('/editor.html')?'AEM authoring URL':'AEM preview/admin URL');\n      }\n    }catch(e){}\n    return fromPath('/content/microsoft/bade/'+raw.replace(/^\\/+|\\/+$/g,''),'Relative BADE path');\n  };\n  const buildPath=(info,market)=>info.root+'/'+market+'/'+info.rest.join('/');\n  const auditOne=async(info,market)=>{\n    const path=buildPath(info,market);\n    const auditUrl=AUTHOR+path+'.html?wcmmode=disabled&ocdebugs=productpriceshowesi&ocaudit=1';\n    const r=await fetch(auditUrl,{cache:'no-store',credentials:'include'});\n    if(!r.ok)throw new Error('HTTP '+r.status);\n    const html=await r.text();\n    const actualKB=new Blob([html]).size/1024;\n    const optimized=html.replace(/^(\\s+)|(\\s+$)|(\\s)+/gm,'');\n    const optimizedKB=new Blob([optimized]).size/1024;\n    return{market,path,auditUrl,actualKB,optimizedKB,savedKB:actualKB-optimizedKB,status:optimizedKB<=MAX_KB?'PASS':'FAIL'};\n  };\n  try{\n    const info=inputInfo(input);\n    if(!info.root||!info.rest.length)throw new Error('Unsupported input. Please use a BADE/ACOM page URL or /content page path.');\n    const markets=['en-us',...LIVE_MARKETS[info.siteKey].filter(m=>m.toLowerCase()!=='en-us')];\n    const w=window.open('','_blank');\n    const reportHtml=`<!doctype html><html><head><meta charset=\"utf-8\"><title>Page Size Overview — ${esc(info.rest.join('/'))}</title><style>body{font:14px/1.5 Segoe UI,Arial;margin:18px;color:#1b1b1b}h2{margin:0 0 4px}.note{color:#616161;margin:4px 0 12px}.intlAlert{display:none;margin:14px 0 10px;padding:12px 14px;border-radius:10px;font-weight:700}.intlAlert.safe{display:block;background:#dff6dd;color:#107c10;border:1px solid #9fd89f}.intlAlert.risk{display:block;background:#fde7e9;color:#a4262c;border:1px solid #f3b7bd}.summary{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:10px;margin:14px 0}.card{border:1px solid #e1dfdd;border-radius:10px;padding:10px;background:#fafafa}.card b{display:block;font-size:20px}.passText{color:#107c10}.failText{color:#a4262c}.loadingText{color:#0067b8}.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700}.badge.pass{background:#dff6dd;color:#107c10;border:1px solid #9fd89f}.badge.fail{background:#fde7e9;color:#a4262c;border:1px solid #f3b7bd}.badge.loading{background:#deecf9;color:#005a9e;border:1px solid #8ec8f2}.badge.error{background:#fff4ce;color:#8a6d00;border:1px solid #f2cc60}table{border-collapse:collapse;width:100%;margin-top:12px}th,td{border:1px solid #e1dfdd;padding:7px 8px;text-align:left;vertical-align:top}th{background:#f3f2f1;position:sticky;top:0}td.num{text-align:right;font-variant-numeric:tabular-nums}.mono{font:12px Consolas,monospace;word-break:break-all}tr.passRow{background:#f3fbf2}tr.failRow{background:#fff4f4}tr.errorRow{background:#fff8df}button{font:14px Segoe UI;padding:7px 14px;margin-right:8px;cursor:pointer;border:1px solid #8a8886;border-radius:4px;background:#0067b8;color:#fff}button.sec{background:#fff;color:#1b1b1b}</style></head><body><h2>Page Size Overview</h2><div class=\"note\">OCToolKit-style optimized size check · Standard limit: <strong>${MAX_KB} KB</strong> · Site: ${esc(info.siteName)} · Input type: ${esc(info.inputType)}</div><div class=\"note mono\">Source pattern: ${esc(info.root+'/{market}/'+info.rest.join('/'))}</div><div class=\"summary\"><div class=\"card\"><span>Total</span><b id=\"total\">${markets.length}</b></div><div class=\"card\"><span>Completed</span><b id=\"done\" class=\"loadingText\">0</b></div><div class=\"card\"><span>PASS</span><b id=\"pass\" class=\"passText\">0</b></div><div class=\"card\"><span>FAIL</span><b id=\"fail\" class=\"failText\">0</b></div><div class=\"card\"><span>Errors</span><b id=\"err\">0</b></div></div><div id=\"enUsAlert\" class=\"intlAlert\"></div><p><button id=\"copyFails\">Copy failed markets</button><button class=\"sec\" id=\"printBtn\">Print / Save PDF</button></p><table id=\"t\"><thead><tr><th>#</th><th>Market</th><th>Status</th><th>Optimized KB</th><th>Raw KB</th><th>Whitespace Saved KB</th><th>Over / Headroom KB</th><th>Delta vs en-us KB</th><th>Audit URL / Error</th></tr></thead><tbody>${markets.map((m,i)=>`<tr id=\"r${i}\"><td>${i+1}</td><td><strong>${m}</strong></td><td><span class=\"badge loading\">Loading</span></td><td class=\"num\">—</td><td class=\"num\">—</td><td class=\"num\">—</td><td class=\"num\">—</td><td class=\"num\">—</td><td class=\"mono\">—</td></tr>`).join('')}</tbody></table></body></html>`;\n    w.document.write(reportHtml);\n    w.document.close();\n    const D=w.document;\n    const results=[];\n    let done=0,pass=0,fail=0,err=0,enUsKB=null;\n    const updateSummary=()=>{D.getElementById('done').textContent=done;D.getElementById('pass').textContent=pass;D.getElementById('fail').textContent=fail;D.getElementById('err').textContent=err;};\n    const updateEnUsAlert=kb=>{const bar=D.getElementById('enUsAlert');if(!bar)return;if(kb>850){bar.className='intlAlert risk';bar.textContent='Safe page size is around 940 KB for Intl. The current en-us page size is over 850 KB, which is high risk for Intl versions.';}else{bar.className='intlAlert safe';bar.textContent='Safe page size is around 940 KB for Intl. The current en-us page size is less than 850 KB, which is safe for Intl versions.';}};\n    const updateRow=(idx,result,error)=>{\n      const tr=D.getElementById('r'+idx);if(!tr)return;\n      if(error){tr.className='errorRow';tr.cells[2].innerHTML='<span class=\"badge error\">ERROR</span>';tr.cells[8].textContent=error.message||String(error);return;}\n      const over=result.optimizedKB-MAX_KB;\n      const delta=enUsKB==null?'—':(result.optimizedKB-enUsKB).toFixed(2);\n      tr.className=result.status==='PASS'?'passRow':'failRow';\n      tr.cells[2].innerHTML='<span class=\"badge '+(result.status==='PASS'?'pass':'fail')+'\">'+result.status+'</span>';\n      tr.cells[3].textContent=result.optimizedKB.toFixed(2);\n      tr.cells[4].textContent=result.actualKB.toFixed(2);\n      tr.cells[5].textContent=result.savedKB.toFixed(2);\n      tr.cells[6].textContent=(over>0?'+':'')+over.toFixed(2);\n      tr.cells[7].textContent=delta;\n      tr.cells[8].innerHTML='<a href=\"'+esc(result.auditUrl)+'\" target=\"_blank\" rel=\"noopener\">'+esc(result.auditUrl)+'</a>';\n      results.push(result);\n    };\n    D.getElementById('printBtn').addEventListener('click',()=>w.print());\n    D.getElementById('copyFails').addEventListener('click',function(){\n      const rows=results.filter(x=>x.status==='FAIL').map(x=>x.market+'\\t'+x.optimizedKB.toFixed(2)+' KB\\t'+x.auditUrl);\n      const t=D.createElement('textarea');t.value=rows.join('\\n');D.body.appendChild(t);t.select();D.execCommand('copy');t.remove();this.textContent=rows.length?'Copied failed markets ✓':'No failed markets';\n    });\n    const runMarket=async(market,idx)=>{\n      try{const result=await auditOne(info,market);if(market==='en-us'){enUsKB=result.optimizedKB;updateEnUsAlert(enUsKB);}result.status==='PASS'?pass++:fail++;updateRow(idx,result,null);}catch(e){err++;updateRow(idx,null,e);}done++;updateSummary();\n    };\n    await runMarket('en-us',0);\n    const tasks=markets.slice(1).map((market,offset)=>async()=>runMarket(market,offset+1));\n    let next=0;\n    const runners=Array.from({length:Math.min(CONCURRENCY,tasks.length)},async()=>{while(next<tasks.length){const i=next++;await tasks[i]();}});\n    await Promise.all(runners);\n    updateSummary();\n  }catch(e){alert('Page Size Checker failed:\\n'+e.message);}\n})();";function installPageSize(){const a=document.getElementById('pageSizeBookmarklet');if(a)a.href='javascript:'+PAGE_SIZE_CODE;}function installXf(){const a=document.getElementById('xfCheckerBookmarklet');if(a)a.href='javascript:'+XF_CODE;}function installPageInfo(){const a=document.getElementById('pageInfoBookmarklet');if(a)a.href='javascript:'+PAGE_INFO_CODE;}document.getElementById('openAemForXfChecker').addEventListener('click',()=>window.open(AEM_BASE,'_blank','noopener,noreferrer'));document.getElementById('openAemForPageInfo').addEventListener('click',()=>window.open(AEM_BASE,'_blank','noopener,noreferrer'));document.getElementById('openAemForPageSize').addEventListener('click',()=>window.open(AEM_BASE,'_blank','noopener,noreferrer'));const bulkBtn=document.getElementById('launchAemBulkPublish');if(bulkBtn)bulkBtn.addEventListener('click',()=>{try{eval(BULK_PUBLISH_CODE.replace(/^javascript:/i,'').replace(/%60/g,'`'));}catch(e){alert('Failed to launch AEM Bulk Publish: '+e.message);}});function switchTool(tool){if(tool==='planned'){showToast('This tool is coming next');return;}document.querySelectorAll('.module-panel').forEach(p=>p.classList.remove('active-panel'));const target=document.getElementById(tool==='xf'?'module-xf':tool==='pageinfo'?'module-pageinfo':tool==='pagesize'?'module-pagesize':tool==='clickrun'?'module-clickrun':tool==='liveurl'?'module-liveurl':'module-converter');if(target)target.classList.add('active-panel');document.querySelectorAll('.nav-item[data-tool]').forEach(n=>n.classList.remove('active'));const nav=document.querySelector(`.nav-item[data-tool="${tool}"]`);if(nav)nav.classList.add('active');}document.querySelectorAll('.nav-item[data-tool]').forEach(item=>item.addEventListener('click',()=>switchTool(item.getAttribute('data-tool'))));installXf();installPageInfo();installPageSize();renderEmptyResults();</script>
+const PAGE_SIZE_CODE="(async()=>{\n  const AUTHOR='https://golf-author.adobeprod.microsoft.com';\n  const MAX_KB=1024;\n  const CONCURRENCY=5;\n  const LIVE_MARKETS={\n    azure:['cs-cz','da-dk','de-de','en-au','en-ca','en-gb','en-in','es-es','es-mx','fr-ca','fr-fr','hu-hu','id-id','it-it','ja-jp','ko-kr','nb-no','nl-nl','pl-pl','pt-br','pt-pt','ru-ru','sv-se','tr-tr','zh-cn','zh-tw'],\n    evalcenter:['de-de','en-gb','en-in','es-es','es-mx','fr-fr','ja-jp','ko-kr','it-it','pt-br','ru-ru','zh-cn','zh-tw'],\n    businessApps:['ar','cs-cz','da-dk','de-at','de-ch','de-de','el-gr','en','en-au','en-ca','en-gb','en-ie','en-in','en-my','en-nz','en-sg','en-za','es','es-ar','es-cl','es-co','es-es','es-mx','fi-fi','fr','fr-be','fr-ca','fr-ch','fr-fr','he-il','hu-hu','it-it','ja-jp','ko-kr','nb-no','nl-be','nl-nl','pl-pl','pt-br','pt-pt','ru-ru','sv-se','th-th','tr-tr','zh-cn','zh-hk','zh-tw'],\n    default:['ar','bg-bg','cs-cz','da-dk','de-at','de-ch','de-de','el-gr','en','en-au','en-ca','en-gb','en-ie','en-in','en-my','en-nz','en-sg','en-za','es','es-ar','es-cl','es-co','es-es','es-mx','et-ee','fi-fi','fr','fr-be','fr-ca','fr-ch','fr-fr','he-il','hr-hr','hu-hu','id-id','it-it','ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-be','nl-nl','pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk','sl-si','sr-latn-rs','sv-se','th-th','tr-tr','uk-ua','vi-vn','zh-cn','zh-hk','zh-tw']\n  };\n  if(location.hostname.indexOf('golf-author')===-1){alert('Please run this on the AEM author site (golf-author.adobeprod.microsoft.com) while logged in.');return;}\n  const input=prompt('Paste a live URL, AEM preview URL, AEM authoring URL, or /content path:',location.href);\n  if(!input)return;\n  const esc=s=>(s||'').replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]));\n  const isLoc=s=>/^[a-z]{2}-[a-z]{2}$/i.test(s||'');\n  const stripHtml=p=>(p||'').replace(/\\.html.*$/i,'');\n  const fromPath=(path,inputType)=>{\n    const clean=stripHtml(path).split('?')[0];\n    const parts=clean.split('/').filter(Boolean);\n    let root='',rest=[],siteKey='default',siteName='Default www.microsoft.com';\n    if(clean.startsWith('/content/microsoft/bade/')){root='/content/microsoft/bade';rest=parts.slice(4);}\n    else if(clean.startsWith('/content/azure/acom/')){root='/content/azure/acom';rest=parts.slice(4);siteKey='azure';siteName='Azure';}\n    const first=(rest[0]||'').toLowerCase();\n    if(root==='/content/microsoft/bade'){\n      if(first==='evalcenter'){siteKey='evalcenter';siteName='Eval Center';}\n      else if(first==='dynamics-365'||first==='power-platform'){siteKey='businessApps';siteName=first==='dynamics-365'?'Dynamics 365':'Power Platform';}\n    }\n    return{path:clean,root,rest,inputType,siteKey,siteName};\n  };\n  const inputInfo=raw=>{\n    raw=(raw||'').trim();\n    if(raw.startsWith('/content/'))return fromPath(raw,'AEM content path');\n    try{\n      const u=new URL(raw);const h=u.hostname.toLowerCase();\n      if(h==='www.microsoft.com'||h==='microsoft.com'){\n        const parts=u.pathname.split('/').filter(Boolean);if(!isLoc(parts[0]))parts.unshift('en-us');\n        return fromPath('/content/microsoft/bade/'+parts.join('/'),'Public www.microsoft.com URL');\n      }\n      if(h==='azure.microsoft.com'){\n        const parts=u.pathname.split('/').filter(Boolean);if(!isLoc(parts[0]))parts.unshift('en-us');\n        return fromPath('/content/azure/acom/'+parts.join('/'),'Public azure.microsoft.com URL');\n      }\n      if(h.includes('adobeprod.microsoft.com')){\n        if(u.pathname.includes('/mnt/overlay/wcm/core/content/sites/properties.html')){const item=u.searchParams.get('item');if(item)return fromPath(item,'AEM properties URL');}\n        const p=decodeURIComponent(u.pathname).replace(/^\\/editor\\.html/,'').replace(/^\\/sites\\.html/,'');\n        return fromPath(p,u.pathname.startsWith('/editor.html')?'AEM authoring URL':'AEM preview/admin URL');\n      }\n    }catch(e){}\n    return fromPath('/content/microsoft/bade/'+raw.replace(/^\\/+|\\/+$/g,''),'Relative BADE path');\n  };\n  const buildPath=(info,market)=>info.root+'/'+market+'/'+info.rest.join('/');\n  const auditOne=async(info,market)=>{\n    const path=buildPath(info,market);\n    const auditUrl=AUTHOR+path+'.html?wcmmode=disabled&ocdebugs=productpriceshowesi&ocaudit=1';\n    const r=await fetch(auditUrl,{cache:'no-store',credentials:'include'});\n    if(!r.ok)throw new Error('HTTP '+r.status);\n    const html=await r.text();\n    const actualKB=new Blob([html]).size/1024;\n    const optimized=html.replace(/^(\\s+)|(\\s+$)|(\\s)+/gm,'');\n    const optimizedKB=new Blob([optimized]).size/1024;\n    return{market,path,auditUrl,actualKB,optimizedKB,savedKB:actualKB-optimizedKB,status:optimizedKB<=MAX_KB?'PASS':'FAIL'};\n  };\n  try{\n    const info=inputInfo(input);\n    if(!info.root||!info.rest.length)throw new Error('Unsupported input. Please use a BADE/ACOM page URL or /content page path.');\n    const markets=['en-us',...LIVE_MARKETS[info.siteKey].filter(m=>m.toLowerCase()!=='en-us')];\n    const w=window.open('','_blank');\n    const reportHtml=`<!doctype html><html><head><meta charset=\"utf-8\"><title>Page Size Overview — ${esc(info.rest.join('/'))}</title><style>body{font:14px/1.5 Segoe UI,Arial;margin:18px;color:#1b1b1b}h2{margin:0 0 4px}.note{color:#616161;margin:4px 0 12px}.intlAlert{display:none;margin:14px 0 10px;padding:12px 14px;border-radius:10px;font-weight:700}.intlAlert.safe{display:block;background:#dff6dd;color:#107c10;border:1px solid #9fd89f}.intlAlert.risk{display:block;background:#fde7e9;color:#a4262c;border:1px solid #f3b7bd}.summary{display:grid;grid-template-columns:repeat(5,minmax(120px,1fr));gap:10px;margin:14px 0}.card{border:1px solid #e1dfdd;border-radius:10px;padding:10px;background:#fafafa}.card b{display:block;font-size:20px}.passText{color:#107c10}.failText{color:#a4262c}.loadingText{color:#0067b8}.badge{display:inline-block;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700}.badge.pass{background:#dff6dd;color:#107c10;border:1px solid #9fd89f}.badge.fail{background:#fde7e9;color:#a4262c;border:1px solid #f3b7bd}.badge.loading{background:#deecf9;color:#005a9e;border:1px solid #8ec8f2}.badge.error{background:#fff4ce;color:#8a6d00;border:1px solid #f2cc60}table{border-collapse:collapse;width:100%;margin-top:12px}th,td{border:1px solid #e1dfdd;padding:7px 8px;text-align:left;vertical-align:top}th{background:#f3f2f1;position:sticky;top:0}td.num{text-align:right;font-variant-numeric:tabular-nums}.mono{font:12px Consolas,monospace;word-break:break-all}tr.passRow{background:#f3fbf2}tr.failRow{background:#fff4f4}tr.errorRow{background:#fff8df}button{font:14px Segoe UI;padding:7px 14px;margin-right:8px;cursor:pointer;border:1px solid #8a8886;border-radius:4px;background:#0067b8;color:#fff}button.sec{background:#fff;color:#1b1b1b}</style></head><body><h2>Page Size Overview</h2><div class=\"note\">OCToolKit-style optimized size check · Standard limit: <strong>${MAX_KB} KB</strong> · Site: ${esc(info.siteName)} · Input type: ${esc(info.inputType)}</div><div class=\"note mono\">Source pattern: ${esc(info.root+'/{market}/'+info.rest.join('/'))}</div><div class=\"summary\"><div class=\"card\"><span>Total</span><b id=\"total\">${markets.length}</b></div><div class=\"card\"><span>Completed</span><b id=\"done\" class=\"loadingText\">0</b></div><div class=\"card\"><span>PASS</span><b id=\"pass\" class=\"passText\">0</b></div><div class=\"card\"><span>FAIL</span><b id=\"fail\" class=\"failText\">0</b></div><div class=\"card\"><span>Errors</span><b id=\"err\">0</b></div></div><div id=\"enUsAlert\" class=\"intlAlert\"></div><p><button id=\"copyFails\">Copy failed markets</button><button class=\"sec\" id=\"printBtn\">Print / Save PDF</button></p><table id=\"t\"><thead><tr><th>#</th><th>Market</th><th>Status</th><th>Optimized KB</th><th>Raw KB</th><th>Whitespace Saved KB</th><th>Over / Headroom KB</th><th>Delta vs en-us KB</th><th>Audit URL / Error</th></tr></thead><tbody>${markets.map((m,i)=>`<tr id=\"r${i}\"><td>${i+1}</td><td><strong>${m}</strong></td><td><span class=\"badge loading\">Loading</span></td><td class=\"num\">—</td><td class=\"num\">—</td><td class=\"num\">—</td><td class=\"num\">—</td><td class=\"num\">—</td><td class=\"mono\">—</td></tr>`).join('')}</tbody></table></body></html>`;\n    w.document.write(reportHtml);\n    w.document.close();\n    const D=w.document;\n    const results=[];\n    let done=0,pass=0,fail=0,err=0,enUsKB=null;\n    const updateSummary=()=>{D.getElementById('done').textContent=done;D.getElementById('pass').textContent=pass;D.getElementById('fail').textContent=fail;D.getElementById('err').textContent=err;};\n    const updateEnUsAlert=kb=>{const bar=D.getElementById('enUsAlert');if(!bar)return;if(kb>850){bar.className='intlAlert risk';bar.textContent='Safe page size is around 940 KB for Intl. The current en-us page size is over 850 KB, which is high risk for Intl versions.';}else{bar.className='intlAlert safe';bar.textContent='Safe page size is around 940 KB for Intl. The current en-us page size is less than 850 KB, which is safe for Intl versions.';}};\n    const updateRow=(idx,result,error)=>{\n      const tr=D.getElementById('r'+idx);if(!tr)return;\n      if(error){tr.className='errorRow';tr.cells[2].innerHTML='<span class=\"badge error\">ERROR</span>';tr.cells[8].textContent=error.message||String(error);return;}\n      const over=result.optimizedKB-MAX_KB;\n      const delta=enUsKB==null?'—':(result.optimizedKB-enUsKB).toFixed(2);\n      tr.className=result.status==='PASS'?'passRow':'failRow';\n      tr.cells[2].innerHTML='<span class=\"badge '+(result.status==='PASS'?'pass':'fail')+'\">'+result.status+'</span>';\n      tr.cells[3].textContent=result.optimizedKB.toFixed(2);\n      tr.cells[4].textContent=result.actualKB.toFixed(2);\n      tr.cells[5].textContent=result.savedKB.toFixed(2);\n      tr.cells[6].textContent=(over>0?'+':'')+over.toFixed(2);\n      tr.cells[7].textContent=delta;\n      tr.cells[8].innerHTML='<a href=\"'+esc(result.auditUrl)+'\" target=\"_blank\" rel=\"noopener\">'+esc(result.auditUrl)+'</a>';\n      results.push(result);\n    };\n    D.getElementById('printBtn').addEventListener('click',()=>w.print());\n    D.getElementById('copyFails').addEventListener('click',function(){\n      const rows=results.filter(x=>x.status==='FAIL').map(x=>x.market+'\\t'+x.optimizedKB.toFixed(2)+' KB\\t'+x.auditUrl);\n      const t=D.createElement('textarea');t.value=rows.join('\\n');D.body.appendChild(t);t.select();D.execCommand('copy');t.remove();this.textContent=rows.length?'Copied failed markets ✓':'No failed markets';\n    });\n    const runMarket=async(market,idx)=>{\n      try{const result=await auditOne(info,market);if(market==='en-us'){enUsKB=result.optimizedKB;updateEnUsAlert(enUsKB);}result.status==='PASS'?pass++:fail++;updateRow(idx,result,null);}catch(e){err++;updateRow(idx,null,e);}done++;updateSummary();\n    };\n    await runMarket('en-us',0);\n    const tasks=markets.slice(1).map((market,offset)=>async()=>runMarket(market,offset+1));\n    let next=0;\n    const runners=Array.from({length:Math.min(CONCURRENCY,tasks.length)},async()=>{while(next<tasks.length){const i=next++;await tasks[i]();}});\n    await Promise.all(runners);\n    updateSummary();\n  }catch(e){alert('Page Size Checker failed:\\n'+e.message);}\n})();";function installPageSize(){const a=document.getElementById('pageSizeBookmarklet');if(a)a.href='javascript:'+PAGE_SIZE_CODE;}function installXf(){const a=document.getElementById('xfCheckerBookmarklet');if(a)a.href='javascript:'+XF_CODE;}function installPageInfo(){const a=document.getElementById('pageInfoBookmarklet');if(a)a.href='javascript:'+PAGE_INFO_CODE;}document.getElementById('openAemForXfChecker').addEventListener('click',()=>window.open(AEM_BASE,'_blank','noopener,noreferrer'));document.getElementById('openAemForPageInfo').addEventListener('click',()=>window.open(AEM_BASE,'_blank','noopener,noreferrer'));document.getElementById('openAemForPageSize').addEventListener('click',()=>window.open(AEM_BASE,'_blank','noopener,noreferrer'));const bulkBtn=document.getElementById('launchAemBulkPublish');if(bulkBtn)bulkBtn.addEventListener('click',()=>{try{eval(BULK_PUBLISH_CODE.replace(/^javascript:/i,'').replace(/%60/g,'`'));}catch(e){alert('Failed to launch AEM Bulk Publish: '+e.message);}});
+
+
+function xmlEscape(value){
+  return String(value || '')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;')
+    .replace(/'/g,'&apos;');
+}
+function xliffShowStatus(message,type='info'){
+  const box=document.getElementById('xliffStatusBox');
+  if(!box)return;
+  box.textContent=message||'';
+  box.className=message?'status show '+type:'status';
+}
+function xliffShowSpaceValidation(message,type='info'){
+  const box=document.getElementById('xliffSpaceValidationBox');
+  if(!box)return;
+  box.textContent=message||'';
+  box.className=message?'status show '+type:'status';
+}
+function getXliffFormat(){
+  return document.querySelector('input[name="xliffGeneratorFormat"]:checked')?.value || 'txlf';
+}
+const INVALID_XLIFF_SPACE_MAP={
+  '\u202F':'U+202F NARROW NO-BREAK SPACE',
+  '\u00A0':'U+00A0 NO-BREAK SPACE',
+  '\u2007':'U+2007 FIGURE SPACE',
+  '\u2009':'U+2009 THIN SPACE',
+  '\u200A':'U+200A HAIR SPACE'
+};
+function getUnicodeSpaceIssues(value){
+  const issues=[];
+  String(value||'').split(/\r?\n/).forEach((line,lineIndex)=>{
+    Array.from(line).forEach((char,charIndex)=>{
+      if(INVALID_XLIFF_SPACE_MAP[char]){
+        issues.push({
+          line:lineIndex+1,
+          column:charIndex+1,
+          code:INVALID_XLIFF_SPACE_MAP[char],
+          text:line
+        });
+      }
+    });
+  });
+  return issues;
+}
+function countNormalSpaces(value){
+  return (String(value||'').match(/ /g)||[]).length;
+}
+let xliffLastInvalidSpaceSignature='';
+function validateXliffSpaces(showPopup=false){
+  const input=document.getElementById('xliffSourceInput');
+  const output=document.getElementById('xliffOutput');
+  const generateBtn=document.getElementById('xliffGenerateBtn');
+  const fixBtn=document.getElementById('xliffFixSpacesBtn');
+  const copyBtn=document.getElementById('xliffCopyBtn');
+  const downloadBtn=document.getElementById('xliffDownloadBtn');
+  const value=input?input.value:'';
+  const issues=getUnicodeSpaceIssues(value);
+  const invalidCount=issues.length;
+  if(fixBtn)fixBtn.disabled=invalidCount===0;
+  if(invalidCount>0){
+    if(generateBtn)generateBtn.disabled=true;
+    if(copyBtn)copyBtn.disabled=true;
+    if(downloadBtn)downloadBtn.disabled=true;
+    if(output)output.value='';
+    const byCode={};
+    issues.forEach(i=>{byCode[i.code]=(byCode[i.code]||0)+1;});
+    const summary=Object.keys(byCode).map(code=>code+': '+byCode[code]).join('; ');
+    const details=issues.slice(0,6).map(i=>'Line '+i.line+', column '+i.column+': '+i.code+'\n  '+i.text).join('\n');
+    const message='Space Validation Failed.\nExpected: U+0020 SPACE only.\nFound '+invalidCount+' invalid Unicode space(s): '+summary+'\n\n'+details+(issues.length>6?'\n...':'');
+    xliffShowSpaceValidation(message,'error');
+    xliffShowStatus('TXLF generation blocked. Fix invalid spaces before generating.','error');
+    const signature=issues.map(i=>i.line+':'+i.column+':'+i.code).join('|');
+    if(showPopup&&signature&&signature!==xliffLastInvalidSpaceSignature){
+      xliffLastInvalidSpaceSignature=signature;
+      alert('Space Validation Failed\n\nFound '+invalidCount+' invalid Unicode space(s).\nExpected: U+0020 SPACE.\nExample issue: '+issues[0].code+' on line '+issues[0].line+'.\n\nClick “Fix All Spaces” before generating TXLF.');
+    }
+    return{valid:false,issues};
+  }
+  xliffLastInvalidSpaceSignature='';
+  if(generateBtn)generateBtn.disabled=false;
+  if(value.trim()){
+    xliffShowSpaceValidation('Space Validation Passed. Normal spaces detected: U+0020 count = '+countNormalSpaces(value)+'.','info');
+  }else{
+    xliffShowSpaceValidation('');
+  }
+  return{valid:true,issues:[]};
+}
+function fixXliffSpaces(){
+  const input=document.getElementById('xliffSourceInput');
+  const output=document.getElementById('xliffOutput');
+  const copyBtn=document.getElementById('xliffCopyBtn');
+  const downloadBtn=document.getElementById('xliffDownloadBtn');
+  if(!input)return;
+  const before=input.value;
+  const issues=getUnicodeSpaceIssues(before);
+  input.value=before.replace(/[\u202F\u00A0\u2007\u2009\u200A]/g,' ');
+  if(output)output.value='';
+  if(copyBtn)copyBtn.disabled=true;
+  if(downloadBtn)downloadBtn.disabled=true;
+  validateXliffSpaces(false);
+  xliffShowStatus('Fixed '+issues.length+' invalid space(s). All were replaced with U+0020 SPACE.','info');
+}
+function buildSpaceWarnings(lines){
+  const warnings=[];
+  lines.forEach((line,index)=>{
+    if(/^\s|\s$/.test(line))warnings.push('Line '+(index+1)+': leading/trailing space');
+    if(/ {2,}/.test(line))warnings.push('Line '+(index+1)+': multiple consecutive U+0020 spaces');
+  });
+  return warnings;
+}
+function buildTxlfOutput(lines){
+  const units=lines.map(line=>{
+    const value=xmlEscape(line);
+    return '<trans-unit>\n  <source>'+value+'</source>\n  <target state-qualifier="exact-match" state="needs-translation">'+value+'</target>\n</trans-unit>';
+  }).join('\n');
+  return '<?xml version=\'1.0\' encoding=\'UTF-8\'?>\n<xliff xmlns="urn:oasis:names:tc:xliff:document:1.2" xmlns:gs4tr="https://www.gs4tr.org/schema/xliff-ext" version="1.2">\n<group id="paragraph-1-1" restype="x-paragraph" datatype="html">\n'+units+'\n</group></xliff>';
+}
+function buildXliffOutput(lines){
+  const body=lines.map((line,index)=>{
+    const id='string_'+String(index+1).padStart(3,'0');
+    return '      <trans-unit id="'+id+'">\n        <source>'+xmlEscape(line)+'</source>\n        <target>'+xmlEscape(line)+'</target>\n      </trans-unit>';
+  }).join('\n');
+  return '<?xml version="1.0" encoding="UTF-8"?>\n<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">\n  <file source-language="en-us" target-language="en-us" datatype="plaintext" original="BADE-INTL-Toolbox">\n    <body>\n'+body+'\n    </body>\n  </file>\n</xliff>';
+}
+function buildSimpleXmlOutput(lines){
+  const body=lines.map((line,index)=>{
+    const id='string_'+String(index+1).padStart(3,'0');
+    return '  <string id="'+id+'">'+xmlEscape(line)+'</string>';
+  }).join('\n');
+  return '<?xml version="1.0" encoding="UTF-8"?>\n<strings>\n'+body+'\n</strings>';
+}
+function generateXliffXml(){
+  const input=document.getElementById('xliffSourceInput');
+  const output=document.getElementById('xliffOutput');
+  const copyBtn=document.getElementById('xliffCopyBtn');
+  const downloadBtn=document.getElementById('xliffDownloadBtn');
+  if(!input||!output)return '';
+  const validation=validateXliffSpaces(true);
+  if(!validation.valid){
+    output.value='';
+    if(copyBtn)copyBtn.disabled=true;
+    if(downloadBtn)downloadBtn.disabled=true;
+    return '';
+  }
+  const lines=input.value.split(/\r?\n/).filter(line=>line.length>0);
+  if(!lines.length){
+    output.value='';
+    if(copyBtn)copyBtn.disabled=true;
+    if(downloadBtn)downloadBtn.disabled=true;
+    xliffShowStatus('Please paste at least one source string.','error');
+    return '';
+  }
+  const format=getXliffFormat();
+  const generated=format==='xml'?buildSimpleXmlOutput(lines):(format==='xliff'?buildXliffOutput(lines):buildTxlfOutput(lines));
+  output.value=generated;
+  if(copyBtn)copyBtn.disabled=false;
+  if(downloadBtn)downloadBtn.disabled=false;
+  const warnings=buildSpaceWarnings(lines);
+  if(warnings.length){
+    xliffShowStatus('Generated '+lines.length+' item(s). Self-check warnings: '+warnings.slice(0,3).join('; ')+(warnings.length>3?' ...':'') ,'error');
+  }else{
+    xliffShowStatus('Generated '+lines.length+' item(s). Self-check passed.','info');
+  }
+  return generated;
+}
+function initXliffXmlGenerator(){
+  const generateBtn=document.getElementById('xliffGenerateBtn');
+  const fixBtn=document.getElementById('xliffFixSpacesBtn');
+  const copyBtn=document.getElementById('xliffCopyBtn');
+  const downloadBtn=document.getElementById('xliffDownloadBtn');
+  const clearBtn=document.getElementById('xliffClearBtn');
+  const input=document.getElementById('xliffSourceInput');
+  const output=document.getElementById('xliffOutput');
+  if(input){
+    input.addEventListener('input',()=>validateXliffSpaces(true));
+    input.addEventListener('paste',()=>setTimeout(()=>validateXliffSpaces(true),10));
+  }
+  if(generateBtn)generateBtn.addEventListener('click',generateXliffXml);
+  if(fixBtn)fixBtn.addEventListener('click',fixXliffSpaces);
+  if(copyBtn)copyBtn.addEventListener('click',()=>{
+    const value=(output&&output.value)||generateXliffXml();
+    if(value)copyText(value);
+  });
+  if(downloadBtn)downloadBtn.addEventListener('click',()=>{
+    const value=(output&&output.value)||generateXliffXml();
+    if(!value)return;
+    const format=getXliffFormat();
+    const blob=new Blob([value],{type:'application/xml;charset=utf-8'});
+    const a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);
+    a.download=format==='xml'?'bade-intl-strings.xml':(format==='xliff'?'bade-intl-strings.xlf':'bade-intl-strings.txlf');
+    document.body.appendChild(a);
+    a.click();
+    URL.revokeObjectURL(a.href);
+    a.remove();
+  });
+  if(clearBtn)clearBtn.addEventListener('click',()=>{
+    if(input)input.value='';
+    if(output)output.value='';
+    if(copyBtn)copyBtn.disabled=true;
+    if(downloadBtn)downloadBtn.disabled=true;
+    if(fixBtn)fixBtn.disabled=true;
+    xliffShowSpaceValidation('');
+    xliffShowStatus('');
+  });
+  validateXliffSpaces(false);
+}
+function switchTool(tool){
+  if(tool==='planned'){
+    showToast('This tool is coming next');
+    return;
+  }
+
+  const mappedTool = tool === 'bookmarklet' ? 'pageinfo' : tool;
+
+  document.querySelectorAll('.module-panel').forEach(p=>p.classList.remove('active-panel'));
+
+  const target = document.getElementById(
+    mappedTool==='xf' ? 'module-xf' :
+    mappedTool==='pageinfo' ? 'module-pageinfo' :
+    mappedTool==='pagesize' ? 'module-pagesize' :
+    mappedTool==='clickrun' ? 'module-clickrun' :
+    mappedTool==='liveurl' ? 'module-liveurl' :
+    'module-converter'
+  );
+
+  if(target) target.classList.add('active-panel');
+
+  document.querySelectorAll('.nav-item[data-tool]').forEach(n=>n.classList.remove('active'));
+
+  const navTool = (tool==='bookmarklet'||tool==='pageinfo'||tool==='xf'||tool==='pagesize')
+    ? 'bookmarklet'
+    : mappedTool;
+
+  const nav = document.querySelector(`.nav-item[data-tool="${navTool}"]`);
+  if(nav) nav.classList.add('active');
+}document.querySelectorAll('.nav-item[data-tool]').forEach(item=>item.addEventListener('click',()=>switchTool(item.getAttribute('data-tool'))));installXf();installPageInfo();installPageSize();initXliffXmlGenerator();renderEmptyResults();</script>
 </body>
 </html>
