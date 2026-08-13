@@ -2526,31 +2526,140 @@ const XF_CODE = String.raw`
             '<span id="prog">loading dates 0/' + xfs.length + '…</span> · ' +
             '<b style="color:#a4262c" id="sc">0</b> en-gb older · ' +
             '<span id="mc">0</span> en-gb missing</small>' +
-        '<div class="bar">' +
-            '<button onclick="var v=window.__priceList();if(!v){this.textContent=\'No Pricing XF\';return;}var t=document.createElement(\'textarea\');t.value=v;document.body.appendChild(t);t.select();document.execCommand(\'copy\');t.remove();this.textContent=\'Copied ✓\';">Copy Pricing XF list</button>' +
-            '<button class="sec" onclick="window.print()">Print / Save PDF</button>' +
+        '\<div class="bar"\>' +
+    '\<button id="copyPricingBtn"\>Copy Pricing XF list\</button\>' +
+    '\<button class="sec" id="printBtn"\>Print / Save PDF\</button\>' +
             '<span class="legend">' +
                 '<span><span class="sw" style="background:#f8d7da"></span>en-gb older</span>' +
                 '<span><span class="sw" style="background:#fff4ce"></span>en-gb missing</span>' +
             '</span>' +
         '</div>' +
-        '<table id="t"><thead><tr>' +
-            '<th>#</th>' +
-            '<th onclick="__sort(1)">Type</th>' +
-            '<th onclick="__sort(2)">fragmentVariationPath</th>' +
-            '<th onclick="__sort(3)">en-us modified</th>' +
-            '<th onclick="__sort(4)">en-gb modified</th>' +
-        '</tr></thead><tbody>' + trs + '</tbody></table>' +
-        '<script>' +
-        'window.__sort=function(c){var tb=document.querySelector(\'#t tbody\');var rs=[].slice.call(tb.rows);var asc=tb.getAttribute(\'d\')!=(\'a\'+c);tb.setAttribute(\'d\',asc?(\'a\'+c):\'\');rs.sort(function(a,b){var x=a.cells[c].innerText,y=b.cells[c].innerText;return asc?(x>y?1:x<y?-1:0):(x<y?1:x>y?-1:0);});rs.forEach(function(r){tb.appendChild(r);});};' +
-        'window.__priceList=function(){var out=[];var tb=document.querySelector(\'#t tbody\');[].slice.call(tb.rows).forEach(function(r){if(r.cells[1].innerText.trim()===\'Pricing XF\'){out.push(r.cells[2].innerText.trim());}});return out.join(\'\\n\');};' +
-        '<\\/script></body></html>';
+        '\<table id="t"\>\<thead\>\<tr\>' +
+    '\<th\>#\</th\>' +
+    '\<th data-sort="1"\>Type\</th\>' +
+    '\<th data-sort="2"\>fragmentVariationPath\</th\>' +
+    '\<th data-sort="3"\>en-us modified\</th\>' +
+    '\<th data-sort="4"\>en-gb modified\</th\>' +
+'\</tr\>\</thead\>\<tbody\>' + trs + '\</tbody\>\</table\>' +
+        '\</body\>\</html\>';
 
     w.document.write(reportHtml);
     w.document.close();
 
-    const D = w.document;
-    let done = 0;
+const D = w.document;
+
+const sortTable = function (c) {
+    const tb = D.querySelector("#t tbody");
+    if (!tb) return;
+
+    const rows = Array.prototype.slice.call(tb.rows);
+    const asc = tb.getAttribute("data-sort") !== "a" + c;
+
+    tb.setAttribute("data-sort", asc ? "a" + c : "");
+
+    rows.sort(function (a, b) {
+        const x = a.cells[c].innerText;
+        const y = b.cells[c].innerText;
+
+        if (asc) {
+            return x > y ? 1 : x < y ? -1 : 0;
+        }
+
+        return x < y ? 1 : x > y ? -1 : 0;
+    });
+
+    rows.forEach(function (row) {
+        tb.appendChild(row);
+    });
+};
+
+const getPricingList = function () {
+    const out = [];
+    const tb = D.querySelector("#t tbody");
+
+    if (!tb) return "";
+
+    Array.prototype.slice.call(tb.rows).forEach(function (row) {
+        if (row.cells[1].innerText.trim() === "Pricing XF") {
+            out.push(row.cells[2].innerText.trim());
+        }
+    });
+
+    return out.join("\n");
+};
+
+const copyPricingList = function () {
+    const btn = D.getElementById("copyPricingBtn");
+    const value = getPricingList();
+
+    if (!value) {
+        if (btn) btn.textContent = "No Pricing XF";
+        return;
+    }
+
+    const complete = function () {
+        if (btn) {
+            btn.textContent = "Copied ✓";
+            setTimeout(function () {
+                btn.textContent = "Copy Pricing XF list";
+            }, 1800);
+        }
+    };
+
+    const fallbackCopy = function () {
+        const textarea = D.createElement("textarea");
+        textarea.value = value;
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+
+        D.body.appendChild(textarea);
+        textarea.focus();
+        textarea.select();
+
+        try {
+            D.execCommand("copy");
+            complete();
+        } catch (e) {
+            if (btn) btn.textContent = "Copy failed";
+        }
+
+        textarea.remove();
+    };
+
+    if (
+        w.navigator &&
+        w.navigator.clipboard &&
+        w.isSecureContext
+    ) {
+        w.navigator.clipboard.writeText(value)
+            .then(complete)
+            .catch(fallbackCopy);
+    } else {
+        fallbackCopy();
+    }
+};
+
+const copyBtn = D.getElementById("copyPricingBtn");
+if (copyBtn) {
+    copyBtn.addEventListener("click", copyPricingList);
+}
+
+const printBtn = D.getElementById("printBtn");
+if (printBtn) {
+    printBtn.addEventListener("click", function () {
+        w.print();
+    });
+}
+
+Array.prototype.slice.call(
+    D.querySelectorAll("th[data-sort]")
+).forEach(function (th) {
+    th.addEventListener("click", function () {
+        sortTable(Number(th.getAttribute("data-sort")));
+    });
+});
+
+let done = 0;
     let stale = 0;
     let miss = 0;
 
