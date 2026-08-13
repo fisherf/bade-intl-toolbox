@@ -2190,22 +2190,52 @@ const BULK_PUBLISH_CODE = `javascript:(function () {
 
     button.onclick = function () {
 
-        let result = buildWorkflowUrl();
+    let result = buildWorkflowUrl();
 
-        if (result.error) {
-            alert(result.error);
-            return;
+    if (result.error) {
+        alert(result.error);
+        return;
+    }
+
+    const workflowWindow = window.open(
+        "https://golf-author.adobeprod.microsoft.com/aem/inbox",
+        "_blank"
+    );
+
+    setTimeout(function () {
+
+        try {
+
+            if (
+                workflowWindow &&
+                !workflowWindow.closed
+            ) {
+
+                workflowWindow.location.href =
+                    result.url;
+
+            } else {
+
+                window.open(
+                    result.url,
+                    "_blank"
+                );
+
+            }
+
+        } catch (e) {
+
+            window.open(
+                result.url,
+                "_blank"
+            );
+
         }
 
-        window.open(result.url, "_blank");
+    }, 1200);
 
-        setTimeout(function () {
-            window.location.href =
-                "https://golf-author.adobeprod.microsoft.com/aem/inbox";
-        }, 1000);
-
-        document.body.removeChild(container);
-    };
+    document.body.removeChild(container);
+};
 
     let closeButton = document.createElement("button");
     closeButton.textContent = "Close";
