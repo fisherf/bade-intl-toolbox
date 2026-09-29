@@ -420,7 +420,7 @@ en-gb"></textarea>
 </div> <!-- module-liveurl -->
 
 <!-- Click Run module panel -->
-<div class="module-panel" id="module-clickrun"><div class="section-title"><div><h2>Click &amp; Run</h2><p>Collection of one-click automation tools for production operations.</p></div></div><div class="logic-grid"><div class="logic-block"><strong>AEM Bulk Publish</strong><br>Launch the AEM bulk publish workflow dialog. Paste a Microsoft.com or Azure.com URL, select markets, and create the publish workflow.<div class="actions"><button id="launchAemBulkPublish" type="button">Launch AEM Bulk Publish</button></div></div><div class="logic-block xliff-generator-card"><strong>TXLF XLIFF Generator</strong><br>Generate TXLF-ready XLIFF from pasted localization strings. Each non-empty line becomes one translation unit.<div class="input-wrap"><label for="xliffSourceInput">Source strings</label><textarea id="xliffSourceInput" spellcheck="false" placeholder="Paste one source string per line"></textarea><div class="hint">Space validation runs automatically. U+0020 SPACE is valid; U+202F and other non-standard spaces must be fixed before TXLF generation.</div></div><div class="input-wrap"><label>Output format</label><label><input type="radio" name="xliffGeneratorFormat" value="txlf" checked> TXLF XLIFF</label><label><input type="radio" name="xliffGeneratorFormat" value="xliff"> Generic XLIFF 1.2</label><label><input type="radio" name="xliffGeneratorFormat" value="xml"> Simple XML</label></div><div id="xliffSpaceValidationBox" class="status"></div><div class="actions"><button id="xliffGenerateBtn" type="button">Generate</button><button id="xliffFixSpacesBtn" class="secondary" type="button" disabled>Fix All Spaces</button><button id="xliffCopyBtn" class="secondary" type="button" disabled>Copy Output</button><button id="xliffDownloadBtn" class="secondary" type="button" disabled>Download File</button><button id="xliffClearBtn" class="secondary" type="button">Clear</button></div><div id="xliffStatusBox" class="status"></div><div class="input-wrap"><label for="xliffOutput">Generated output</label><textarea id="xliffOutput" spellcheck="false" readonly placeholder="Generated XLIFF/XML will appear here..."></textarea></div></div><div class="logic-block"><strong>Reserved</strong><br>Future automation card.</div><div class="logic-block"><strong>Reserved</strong><br>Future automation card.</div></div></div>  
+<div class="module-panel" id="module-clickrun"><div class="section-title"><div><h2>Click &amp; Run</h2><p>Collection of one-click automation tools for production operations.</p></div></div><div class="logic-grid"><div class="logic-block"><strong>AEM Bulk Publish</strong><br>Launch the AEM bulk publish workflow dialog. Paste a Microsoft.com or Azure.com URL, select markets, and create the publish workflow.<div class="actions"><button id="launchAemBulkPublish" type="button">Launch AEM Bulk Publish</button></div></div><div class="logic-block xliff-generator-card"><strong>TXLF XLIFF Generator</strong><br>Generate TXLF-ready XLIFF from pasted localization strings. Each non-empty line becomes one translation unit.<div class="input-wrap"><label for="xliffSourceInput">Source strings</label><textarea id="xliffSourceInput" spellcheck="false" placeholder="Paste one source string per line"></textarea><div class="hint">Space validation runs automatically. U+0020 SPACE is valid; U+202F and other non-standard spaces must be fixed before TXLF generation.</div></div><div class="input-wrap"><label>Output format</label><label><input type="radio" name="xliffGeneratorFormat" value="txlf" checked> TXLF XLIFF</label><label><input type="radio" name="xliffGeneratorFormat" value="xliff"> Generic XLIFF 1.2</label><label><input type="radio" name="xliffGeneratorFormat" value="xml"> Simple XML</label></div><div id="xliffSpaceValidationBox" class="status"></div><div class="actions"><button id="xliffGenerateBtn" type="button">Generate</button><button id="xliffFixSpacesBtn" class="secondary" type="button" disabled>Fix All Spaces</button><button id="xliffCopyBtn" class="secondary" type="button" disabled>Copy Output</button><button id="xliffDownloadBtn" class="secondary" type="button" disabled>Download File</button><button id="xliffClearBtn" class="secondary" type="button">Clear</button></div><div id="xliffStatusBox" class="status"></div><div class="input-wrap"><label for="xliffOutput">Generated output</label><textarea id="xliffOutput" spellcheck="false" readonly placeholder="Generated XLIFF/XML will appear here..."></textarea></div></div><div class="logic-block workfront-filter-card"><strong>WorkFront XF Filter Builder</strong><br>Build a WorkFront Intl URL filter from AEM Experience Fragment paths. Locale segments directly after <code>/bade/</code> are removed automatically.<div class="input-wrap"><label for="workfrontXfInput">Experience Fragment paths</label><textarea id="workfrontXfInput" spellcheck="false" placeholder="Paste one XF path per line"></textarea><div class="hint">Supports locale paths such as en-us and sr-latn-rs. Duplicate normalized XF paths are ignored.</div></div><div class="actions"><button id="workfrontGenerateBtn" type="button">Generate Filter</button><button id="workfrontCopyBtn" class="secondary" type="button" disabled>Copy Filter</button><button id="workfrontClearBtn" class="secondary" type="button">Clear</button></div><div id="workfrontStatusBox" class="status"></div><div class="input-wrap"><label for="workfrontFilterOutput">Generated filter</label><textarea id="workfrontFilterOutput" spellcheck="false" readonly placeholder="Generated WorkFront filter will appear here..."></textarea></div></div><div class="logic-block"><strong>Reserved</strong><br>Future automation card.</div></div></div>  
 <!-- Prod Toolkit module panel -->
 <!-- XF checker -->
 <div class="module-panel" id="module-xf"><div class="bookmarklet-tabs"><button class="bookmarklet-tab" type="button" onclick="switchTool('pageinfo')">Page Basic Info</button><button class="bookmarklet-tab active-tab" type="button" onclick="switchTool('xf')">XF Checker</button><button class="bookmarklet-tab" type="button" onclick="switchTool('pagesize')">Page Size Checker</button><button class="bookmarklet-tab" type="button" onclick="switchTool('pricingterm')">Pricing&amp;Terminology Compare</button></div><div class="bookmarkletBanner">ℹ️ For the latest bookmarklet script versions, find them <a href="https://microsoft.sharepoint-df.com/teams/BADEInternational/Shared%20Documents/Forms/Latest%20on%20top.aspx?id=%2Fteams%2FBADEInternational%2FShared%20Documents%2FProduction%2FBADE%20INTL%20Toolbox&viewid=61ae1445%2Dd7be%2D4181%2D8ec1%2Dcc81894b4983&share=cgrVamskZGPKTagG2IS5%5F37gEgUCAPqWkabhADgzdtTnOIhDYg" target="_blank" rel="noopener">here</a>.</div><div class="section-title"><div><h2>Prod Toolkit · XF Checker</h2><p>XF Checker runs inside AEM, so it can read AEM references without browser cross-origin blocking.</p></div></div><div class="logic-grid"><div class="logic-block"><strong>How to use</strong><br>1. Drag the <strong>XF Checker</strong> button below to your Edge bookmarks bar.<br>2. Open AEM and sign in if needed.<br>3. Select the bookmarklet while you are on AEM.<br>4. Paste a page URL, authoring URL, preview URL, or <code>/content/...</code> page path.<br>5. Results open in a new tab.</div><div class="logic-block"><strong>Install bookmarklet</strong><br><p>Drag this button to the bookmarks bar:</p><a id="xfCheckerBookmarklet" class="link-button" href="#">XF Checker</a><p style="font-size:12px;color:#616161;">If the bookmarks bar is hidden in Edge, press Ctrl + Shift + B.</p></div></div><div class="actions"><button id="openAemForXfChecker" type="button">Open AEM</button></div><div class="instruction-card"><h3>Version</h3><div class="instruction-section">2026-7-16 V3: updated Pricing XF path and exception list so XFs could be categorized more accurately.</div></div></div>
@@ -2983,6 +2983,79 @@ function installProdToolkitBookmarklets(){
   }
 }
 
+function initWorkfrontXfFilterBuilder(){
+  const input=document.getElementById('workfrontXfInput');
+  const output=document.getElementById('workfrontFilterOutput');
+  const generateBtn=document.getElementById('workfrontGenerateBtn');
+  const copyBtn=document.getElementById('workfrontCopyBtn');
+  const clearBtn=document.getElementById('workfrontClearBtn');
+  const status=document.getElementById('workfrontStatusBox');
+  if(!input||!output||!generateBtn||!copyBtn||!clearBtn||!status)return;
+
+  const FIELD='DE:project:Intl - URL';
+  const PREFIX='/content/experience-fragments/microsoft/bade/';
+  const LOCALE=/^[a-z]{2,3}(?:-[a-z]{4})?-(?:[a-z]{2}|\d{3})$/i;
+
+  function setStatus(text,type=''){
+    status.textContent=text;
+    status.className='status'+(type?' '+type:'');
+  }
+  function clean(raw){
+    let value=raw.trim();
+    if(!value)return '';
+    if((value.startsWith('"')&&value.endsWith('"'))||(value.startsWith("'")&&value.endsWith("'")))value=value.slice(1,-1).trim();
+    if(/^https?:\/\//i.test(value)){
+      try{value=new URL(value).pathname;}catch(_){return '';}
+    }
+    value=value.split(/[?#]/,1)[0].replace(/\\/g,'/').replace(/\/{2,}/g,'/').trim();
+    if(!value.startsWith('/'))value='/'+value;
+    if(value.length>1)value=value.replace(/\/+$/,'');
+    return value;
+  }
+  function normalize(raw){
+    const value=clean(raw);
+    if(!value||!value.toLowerCase().startsWith(PREFIX))return null;
+    const parts=value.slice(PREFIX.length).split('/').filter(Boolean);
+    if(!parts.length)return null;
+    if(LOCALE.test(parts[0]))parts.shift();
+    if(!parts.length)return null;
+    return PREFIX+parts.join('/');
+  }
+  function generate(){
+    const rows=input.value.split(/\r?\n/).map(v=>v.trim()).filter(Boolean);
+    if(!rows.length){output.value='';copyBtn.disabled=true;setStatus('Paste at least one XF path.','error');return;}
+    const seen=new Set(),paths=[];
+    let ignored=0,duplicates=0;
+    rows.forEach(row=>{
+      const path=normalize(row);
+      if(!path){ignored++;return;}
+      const key=path.toLowerCase();
+      if(seen.has(key)){duplicates++;return;}
+      seen.add(key);paths.push(path);
+    });
+    if(!paths.length){output.value='';copyBtn.disabled=true;setStatus('No valid BADE XF paths found.','error');return;}
+    output.value=paths.flatMap((path,index)=>{
+      const prefix=index===0?'':`OR:${index}:`;
+      return [`${prefix}${FIELD}=${path}`,`${prefix}${FIELD}_Mod=cicontains`];
+    }).join('\n');
+    copyBtn.disabled=false;
+    const notes=[`Generated ${paths.length} XF filter condition${paths.length===1?'':'s'}.`];
+    if(duplicates)notes.push(`Ignored ${duplicates} duplicate${duplicates===1?'':'s'}.`);
+    if(ignored)notes.push(`Ignored ${ignored} invalid row${ignored===1?'':'s'}.`);
+    setStatus(notes.join(' '),'success');
+  }
+  async function copyOutput(){
+    if(!output.value)return;
+    try{await navigator.clipboard.writeText(output.value);setStatus('Filter copied.','success');}
+    catch(_){output.focus();output.select();const ok=document.execCommand('copy');setStatus(ok?'Filter copied.':'Copy failed. Select the filter and copy it manually.',ok?'success':'error');}
+  }
+  function clear(){input.value='';output.value='';copyBtn.disabled=true;setStatus('');input.focus();}
+  generateBtn.addEventListener('click',generate);
+  copyBtn.addEventListener('click',copyOutput);
+  clearBtn.addEventListener('click',clear);
+  input.addEventListener('keydown',e=>{if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){e.preventDefault();generate();}});
+}
+
 function switchTool(tool){
   if(tool==='planned'){
     showToast('This tool is coming next');
@@ -3013,6 +3086,6 @@ function switchTool(tool){
 
   const nav = document.querySelector(`.nav-item[data-tool="${navTool}"]`);
   if(nav) nav.classList.add('active');
-}document.querySelectorAll('.nav-item[data-tool]').forEach(item=>item.addEventListener('click',()=>switchTool(item.getAttribute('data-tool'))));installXf();installPageInfo();installPageSize();installProdToolkitBookmarklets();initXliffXmlGenerator();renderEmptyResults();</script>
+}document.querySelectorAll('.nav-item[data-tool]').forEach(item=>item.addEventListener('click',()=>switchTool(item.getAttribute('data-tool'))));installXf();installPageInfo();installPageSize();installProdToolkitBookmarklets();initXliffXmlGenerator();initWorkfrontXfFilterBuilder();renderEmptyResults();</script>
 </body>
 </html>
