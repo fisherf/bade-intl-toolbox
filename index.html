@@ -197,7 +197,7 @@ main{max-width:1180px;margin:-22px auto 40px;padding:0 20px}.tool-shell{display:
 <div class="tool-shell"><aside class="side-card"><div class="side-title">Tools</div><div class="nav-item active" data-tool="converter"><strong>🟢 AEM URL Converter</strong><span>Page, Launch, XF, CF, and XF preview links.</span></div><div class="nav-item" data-tool="liveurl"><strong>🟢 URL maker</strong><span>Create URLs by market.</span></div><div class="nav-item" data-tool="clickrun"><strong>🟢 Click &amp; Run</strong><span>One-click automations.</span></div><div class="nav-item" data-tool="bookmarklet"><strong>🟢 Prod Toolkit</strong><span>Collection of bookmarklets, browser extensions, code snippets and productivity tools for AEM and Intl production operations.</span></div><div class="nav-item disabled" data-tool="planned"><strong>⚪ More Functions</strong><span>Coming next</span></div></aside>
 <section class="main-card">
 <!-- AEM URL Converter module panel -->
-<div class="module-panel active-panel" id="module-converter"><div class="section-title"><div><h2>AEM URL Converter</h2><p>Paste one URL or content path. The tool detects the object type and generates related links.</p></div><button id="loadSamplesBtn" type="button">Load samples</button></div><div class="input-wrap"><label for="urlInput">Live URL / AEM URL / AEM path</label><textarea id="urlInput" spellcheck="false" placeholder="Paste a live URL, AEM URL, XF path, or CF path here"></textarea><div class="hint">Tip: If a live Page URL has no locale, the tool defaults it to <strong>en-us</strong>.</div></div><div class="actions"><button id="generateBtn" type="button">Generate Links</button><button id="copyPathBtn" class="secondary" type="button" disabled>Copy Path</button><button id="copyAllBtn" class="secondary" type="button" disabled>Copy All Links</button><button id="openAllBtn" class="secondary" type="button" disabled>Open All Links</button><button id="clearBtn" class="secondary" type="button">Clear</button></div><div id="statusBox" class="status"></div><h3>Generated links</h3><div class="results-grid" id="resultsGrid"></div></div>
+<div class="module-panel active-panel" id="module-converter"><div class="section-title"><div><h2>AEM URL Converter</h2><p>Paste one URL or content path. The tool detects the object type and generates related links.</p></div><button id="loadSamplesBtn" type="button">Load samples</button></div><div class="input-wrap"><label for="urlInput">Live URL / AEM URL / AEM path</label><textarea id="urlInput" spellcheck="false" placeholder="Paste a live URL, AEM URL, XF path, or CF path here"></textarea><div class="hint">Tip: If a live Page URL has no locale, the tool defaults it to <strong>en-us</strong>.</div></div><div class="actions"><button id="generateBtn" type="button">Generate Links</button><button id="convertDomainBtn" class="secondary" type="button" disabled>Convert Domain</button><button id="copyPathBtn" class="secondary" type="button" disabled>Copy Path</button><button id="copyAllBtn" class="secondary" type="button" disabled>Copy All Links</button><button id="openAllBtn" class="secondary" type="button" disabled>Open All Links</button><button id="clearBtn" class="secondary" type="button">Clear</button></div><div id="statusBox" class="status"></div><h3>Generated links</h3><div class="results-grid" id="resultsGrid"></div></div>
 <!-- URL maker module panel -->
 <div class="module-panel" id="module-liveurl">
 
@@ -524,7 +524,7 @@ en-gb"></textarea>
 <div id="toast" class="toast">Copied</div>
 <script>
 
-const AEM_BASE='https://golf-author.adobeprod.microsoft.com';let currentResults=[],currentPath='';const sampleUrls=['https://www.microsoft.com/en-us/microsoft-365/excel-b','https://www.microsoft.com/microsoft-365/excel-b','https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account'];const els={input:document.getElementById('urlInput'),generate:document.getElementById('generateBtn'),copyPath:document.getElementById('copyPathBtn'),copyAll:document.getElementById('copyAllBtn'),openAll:document.getElementById('openAllBtn'),clear:document.getElementById('clearBtn'),samples:document.getElementById('loadSamplesBtn'),status:document.getElementById('statusBox'),grid:document.getElementById('resultsGrid'),toast:document.getElementById('toast')};function showToast(m){els.toast.textContent=m;els.toast.classList.add('show');setTimeout(()=>els.toast.classList.remove('show'),1700)}function showStatus(m,t='info'){els.status.textContent=m;els.status.className='status show '+t}
+const AEM_GOLF_BASE='https://golf-author.adobeprod.microsoft.com';const AEM_CLOUD_BASE='https://author-p147723-e1510601.adobeaemcloud.com';let AEM_BASE=AEM_GOLF_BASE;let currentResults=[],currentPath='';const sampleUrls=['https://www.microsoft.com/en-us/microsoft-365/excel-b','https://www.microsoft.com/microsoft-365/excel-b','https://azure.microsoft.com/en-us/pricing/purchase-options/azure-account'];const els={input:document.getElementById('urlInput'),generate:document.getElementById('generateBtn'),convertDomain:document.getElementById('convertDomainBtn'),copyPath:document.getElementById('copyPathBtn'),copyAll:document.getElementById('copyAllBtn'),openAll:document.getElementById('openAllBtn'),clear:document.getElementById('clearBtn'),samples:document.getElementById('loadSamplesBtn'),status:document.getElementById('statusBox'),grid:document.getElementById('resultsGrid'),toast:document.getElementById('toast')};function showToast(m){els.toast.textContent=m;els.toast.classList.add('show');setTimeout(()=>els.toast.classList.remove('show'),1700)}function showStatus(m,t='info'){els.status.textContent=m;els.status.className='status show '+t}
 function cleanInput(raw)
 {let v=(raw||'').trim();
 const h=v.match(/href=["']([^"']+)["']/i);if(h)return h[1].trim();
@@ -592,7 +592,30 @@ function pathObj(p){if(p.includes('/content/experience-fragments/'))return{type:
 function dirname(p){return p.split('/').slice(0,-1).join('/')}
 function build(d){const p=d.path;if(d.type==='PAGE')return[{type:'Live URL',url:d.live},{type:'Authoring',url:AEM_BASE+'/editor.html'+p+'.html'},{type:'Preview',url:AEM_BASE+p+'.html?wcmmode=disabled'},{type:'Properties',url:AEM_BASE+'/mnt/overlay/wcm/core/content/sites/properties.html?item='+p},{type:'Admin',url:AEM_BASE+'/sites.html'+p}];if(d.type==='LAUNCH'){const parent=dirname(p),base=p.endsWith('/homepage')?parent:p;return[{type:'Launch Mgmt',url:AEM_BASE+'/sites.html'+base+'?rootpath='+parent}]}if(d.type==='XF')return[{type:'XF Authoring',url:AEM_BASE+'/editor.html'+p+'.html'},{type:'XF Preview',url:AEM_BASE+p+'.html?wcmmode=disabled'},{type:'XF Admin',url:AEM_BASE+'/aem/experience-fragments.html'+p}];if(d.type==='CF')return[{type:'CF Authoring',url:AEM_BASE+'/editor.html'+p},{type:'CF Admin',url:AEM_BASE+'/assets.html'+dirname(p)}];return[]}function render(results){els.grid.innerHTML=results.map(r=>`<div class="result-card"><div class="result-head"><div class="result-name">${r.type}</div><div class="result-actions"><button class="mini-btn secondary" data-copy="${encodeURIComponent(r.url)}">Copy</button><a class="link-button mini-btn" href="${r.url}" target="_blank" rel="noopener">Open</a></div></div><div class="url-box">${r.url}</div></div>`).join('')}
 function renderEmptyResults(){els.grid.innerHTML=['Live URL','Authoring','Preview','Properties','Admin','Launch Mgmt','XF Authoring','XF Preview','XF Admin','CF Authoring','CF Admin'].map(t=>`<div class="result-card disabled"><div class="result-name">${t}</div><div class="url-box empty">Generate links to see output.</div></div>`).join('')}async function copyText(t){try{await navigator.clipboard.writeText(t)}catch(e){const x=document.createElement('textarea');x.value=t;document.body.appendChild(x);x.select();document.execCommand('copy');x.remove()}showToast('Copied to clipboard')}
-function generate(){try{const d=detect(els.input.value),r=build(d);currentResults=r;currentPath=d.path;render(r);els.copyPath.disabled=false;els.copyAll.disabled=false;els.openAll.disabled=false;showStatus(`Generated ${r.length} link(s).`)}catch(e){showStatus(e.message,'error')}}els.generate.addEventListener('click',generate);els.grid.addEventListener('click',e=>{const b=e.target.closest('button[data-copy]');if(b)copyText(decodeURIComponent(b.dataset.copy))});els.copyPath.addEventListener('click',()=>copyText(currentPath));els.copyAll.addEventListener('click',()=>copyText(currentResults.map(r=>`${r.type}\t${r.url}`).join('\n')));els.openAll.addEventListener('click',()=>currentResults.forEach(r=>window.open(r.url,'_blank','noopener,noreferrer')));els.clear.addEventListener('click',()=>{els.input.value='';currentResults=[];currentPath='';renderEmptyResults();els.copyPath.disabled=els.copyAll.disabled=els.openAll.disabled=true;els.status.className='status'});els.samples.addEventListener('click',()=>{const cur=els.input.value.trim(),i=sampleUrls.indexOf(cur);els.input.value=sampleUrls[cur&&i>-1?(i+1)%sampleUrls.length:0];generate()});
+function generate(){try{const d=detect(els.input.value),r=build(d);currentResults=r;currentPath=d.path;render(r);els.convertDomain.disabled=false;els.copyPath.disabled=false;els.copyAll.disabled=false;els.openAll.disabled=false;showStatus(`Generated ${r.length} link(s).`)}catch(e){showStatus(e.message,'error')}}
+function convertGeneratedDomains(){
+  if(!currentResults.length){
+    showStatus('No generated links to convert.','error');
+    return;
+  }
+  const golf=AEM_GOLF_BASE;
+  const cloud=AEM_CLOUD_BASE;
+  const blob=currentResults.map(r=>r.url).join('\n');
+  let from,to;
+  if(blob.includes(golf)){
+    from=golf;to=cloud;
+  }else if(blob.includes(cloud)){
+    from=cloud;to=golf;
+  }else{
+    showStatus('No supported domain found in generated links.','error');
+    return;
+  }
+  currentResults=currentResults.map(r=>({...r,url:r.url.split(from).join(to)}));
+  AEM_BASE=to;
+  render(currentResults);
+  showStatus('Converted generated links to '+to+'.');
+}
+els.generate.addEventListener('click',generate);els.convertDomain.addEventListener('click',convertGeneratedDomains);els.grid.addEventListener('click',e=>{const b=e.target.closest('button[data-copy]');if(b)copyText(decodeURIComponent(b.dataset.copy))});els.copyPath.addEventListener('click',()=>copyText(currentPath));els.copyAll.addEventListener('click',()=>copyText(currentResults.map(r=>`${r.type}\t${r.url}`).join('\n')));els.openAll.addEventListener('click',()=>currentResults.forEach(r=>window.open(r.url,'_blank','noopener,noreferrer')));els.clear.addEventListener('click',()=>{els.input.value='';currentResults=[];currentPath='';renderEmptyResults();els.convertDomain.disabled=els.copyPath.disabled=els.copyAll.disabled=els.openAll.disabled=true;els.status.className='status'});els.samples.addEventListener('click',()=>{const cur=els.input.value.trim(),i=sampleUrls.indexOf(cur);els.input.value=sampleUrls[cur&&i>-1?(i+1)%sampleUrls.length:0];generate()});
 
 const LIVE_MARKETS = {
   azure:['cs-cz','da-dk','de-de','en-au','en-ca','en-gb','en-in','es-es','es-mx','fr-ca','fr-fr','hu-hu','id-id','it-it','ja-jp','ko-kr','nb-no','nl-nl','pl-pl','pt-br','pt-pt','ru-ru','sv-se','tr-tr','zh-cn','zh-tw'],
@@ -602,7 +625,7 @@ const LIVE_MARKETS = {
   default:['ar','bg-bg','cs-cz','da-dk','de-at','de-ch','de-de','el-gr','en','en-au','en-ca','en-gb','en-ie','en-in','en-my','en-nz','en-sg','en-za','es','es-ar','es-cl','es-co','es-es','es-mx','et-ee','fi-fi','fr','fr-be','fr-ca','fr-ch','fr-fr','he-il','hr-hr','hu-hu','id-id','it-it','ja-jp','ko-kr','lt-lt','lv-lv','nb-no','nl-be','nl-nl','pl-pl','pt-br','pt-pt','ro-ro','ru-ru','sk-sk','sl-si','sr-latn-rs','sv-se','th-th','tr-tr','uk-ua','vi-vn','zh-cn','zh-hk','zh-tw']
 };
 
-const LIVE_EXTRA_LOCALES = ['en-us'];
+const LIVE_EXTRA_LOCALES = ['en-us','en-bz'];
 
 const LIVE_LOCALE_SET =
   new Set(
@@ -999,17 +1022,15 @@ if(alwaysPublic){
 
             let url = workingSource;
 
-            const marketPattern =
-                /\/(ar|bg-bg|cs-cz|da-dk|de-at|de-ch|de-de|el-gr|en|en-au|en-ca|en-gb|en-ie|en-in|en-my|en-nz|en-sg|en-us|en-za|es|es-ar|es-cl|es-co|es-es|es-mx|et-ee|fi-fi|fr|fr-be|fr-ca|fr-ch|fr-fr|he-il|hr-hr|hu-hu|id-id|it-it|ja-jp|ko-kr|lt-lt|lv-lv|nb-no|nl-be|nl-nl|pl-pl|pt-br|pt-pt|ro-ro|ru-ru|sk-sk|sl-si|sr-rs|sr-latn-rs|sv-se|th-th|tr-tr|uk-ua|vi-vn|zh-cn|zh-hk|zh-tw)(?=\/|$)/i;
+            const pathParts = url.split('/');
 
-            const hasExistingLocale =
-                marketPattern.test(url);
+            const localeIndex = pathParts.findIndex(
+                part => LIVE_LOCALE_SET.has(part.toLowerCase())
+            );
 
-            if(hasExistingLocale){
-                url = url.replace(
-                    marketPattern,
-                    '/' + locale
-                );
+            if(localeIndex !== -1){
+                pathParts[localeIndex] = locale;
+                url = pathParts.join('/');
             }
             else if(/^https?:\/\/(www\.)?microsoft\.com\//i.test(url)){
                 url = url.replace(
@@ -2304,19 +2325,16 @@ const XF_CODE = String.raw`
         return PRICING_ROOTS.some(root => c.startsWith(root));
     };
 
-    if (!location.hostname.includes("golf-author")) {
-        alert("Please run this on the AEM author site (golf-author.adobeprod.microsoft.com) while logged in.");
-        return;
-    }
-
-    const input = prompt(
-        "Paste a page URL (live, editor, or /content path):",
-        "https://www.microsoft.com/en-us/microsoft-365/enterprise/microsoft-365-plans-and-pricing"
-    );
-    if (!input) return;
+    const esc = value => String(value || "").replace(/[&<>"]/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        "\"": "&quot;"
+    }[char]));
 
     const toContentPath = value => {
         let s = String(value || "").trim();
+
         if (s.indexOf("/content/") === 0) {
             return s.replace(/\.html.*$/i, "");
         }
@@ -2342,9 +2360,11 @@ const XF_CODE = String.raw`
         while ((m = re.exec(html)) !== null) {
             let p = m[0];
             const masterIndex = p.indexOf("/master");
+
             if (masterIndex !== -1) {
                 p = p.slice(0, masterIndex + 7);
             }
+
             out.add(p);
         }
 
@@ -2352,24 +2372,59 @@ const XF_CODE = String.raw`
     };
 
     const getRefs = async path => {
-        const url = AUTHOR + REF + "?item=" + encodeURIComponent(path) + "&_=" + Date.now();
-        const r = await fetch(url, { credentials: "include" });
+        try {
+            const url =
+                AUTHOR +
+                REF +
+                "?item=" +
+                encodeURIComponent(path) +
+                "&_=" +
+                Date.now();
 
-        if (!r.ok) {
-            return { ok: false, status: r.status, xfs: [] };
+            const r = await fetch(url, {
+                credentials: "include"
+            });
+
+            if (!r.ok) {
+                return {
+                    ok: false,
+                    status: r.status,
+                    xfs: []
+                };
+            }
+
+            const html = await r.text();
+
+            if (
+                /j_username|login\.okta|microsoftonline/i.test(html) &&
+                !/experience-fragments/.test(html)
+            ) {
+                return {
+                    ok: false,
+                    login: true,
+                    xfs: []
+                };
+            }
+
+            return {
+                ok: true,
+                xfs: parseXFs(html)
+            };
+        } catch (e) {
+            return {
+                ok: false,
+                status: "network error",
+                xfs: []
+            };
         }
-
-        const html = await r.text();
-        if (/j_username|login\.okta|microsoftonline/i.test(html) && !/experience-fragments/.test(html)) {
-            return { ok: false, login: true, xfs: [] };
-        }
-
-        return { ok: true, xfs: parseXFs(html) };
     };
 
     const childPages = async path => {
         try {
-            const r = await fetch(AUTHOR + path + ".1.json", { credentials: "include" });
+            const r = await fetch(AUTHOR + path + ".1.json", {
+                credentials: "include"
+            });
+
             if (!r.ok) return [];
 
             const j = await r.json();
@@ -2377,8 +2432,14 @@ const XF_CODE = String.raw`
 
             for (const k in j) {
                 if (/^(jcr:|rep:|cq:)/.test(k)) continue;
+
                 const v = j[k];
-                if (v && typeof v === "object" && v["jcr:primaryType"] === "cq:Page") {
+
+                if (
+                    v &&
+                    typeof v === "object" &&
+                    v["jcr:primaryType"] === "cq:Page"
+                ) {
                     kids.push(path + "/" + k);
                 }
             }
@@ -2390,17 +2451,34 @@ const XF_CODE = String.raw`
     };
 
     const swapLocale = (xf, targetLocale) => {
-        const re = new RegExp("(\\/experience-fragments\\/microsoft\\/bade\\/)" + BASE + "(\\/)");
+        const re = new RegExp(
+            "(\\/experience-fragments\\/microsoft\\/bade\\/)" +
+            BASE +
+            "(\\/)"
+        );
+
         return xf.replace(re, "$1" + targetLocale + "$2");
     };
 
     const fmt = raw => {
-        if (!raw) return { str: "", date: null };
+        if (!raw) {
+            return {
+                str: "",
+                date: null
+            };
+        }
 
         const d = new Date(raw);
-        if (isNaN(d)) return { str: String(raw), date: null };
+
+        if (isNaN(d)) {
+            return {
+                str: String(raw),
+                date: null
+            };
+        }
 
         const p = n => String(n).padStart(2, "0");
+
         return {
             str:
                 d.getUTCFullYear() + "-" +
@@ -2415,7 +2493,9 @@ const XF_CODE = String.raw`
 
     const pickMod = j => {
         if (!j || typeof j !== "object") return "";
+
         const c = j["jcr:content"] || {};
+
         return (
             c["cq:lastModified"] ||
             c["jcr:lastModified"] ||
@@ -2427,304 +2507,864 @@ const XF_CODE = String.raw`
 
     const modOf = async xfPath => {
         try {
-            const r = await fetch(AUTHOR + encodeURI(xfPath) + ".1.json", { credentials: "include" });
-            if (!r.ok) return { raw: "", missing: true };
+            const r = await fetch(
+                AUTHOR + encodeURI(xfPath) + ".1.json",
+                {
+                    credentials: "include"
+                }
+            );
+
+            if (!r.ok) {
+                return {
+                    raw: "",
+                    missing: true
+                };
+            }
 
             const j = await r.json();
-            return { raw: pickMod(j), missing: false };
+
+            return {
+                raw: pickMod(j),
+                missing: false
+            };
         } catch (e) {
-            return { raw: "", missing: true };
+            return {
+                raw: "",
+                missing: true
+            };
         }
     };
 
-    const editLink = xf => AUTHOR + "/editor.html" + xf + ".html";
+    const editLink = xf =>
+        AUTHOR + "/editor.html" + xf + ".html";
 
-    const esc = s => String(s || "").replace(/[&<>"]/g, c => ({
-        "&": "&amp;",
-        "<": "&lt;",
-        ">": "&gt;",
-        "\"": "&quot;"
-    }[c]));
+    const previewLink = xf =>
+        AUTHOR + xf + ".html?wcmmode=disabled";
+
+    if (!location.hostname.includes("golf-author")) {
+        alert(
+            "Please run this on the AEM author site " +
+            "(golf-author.adobeprod.microsoft.com) while logged in."
+        );
+        return;
+    }
+
+    const input = prompt(
+        "Paste a page URL (live, editor, or /content path):",
+        "https://www.microsoft.com/en-us/microsoft-365/enterprise/microsoft-365-plans-and-pricing"
+    );
+
+    if (!input) return;
+
+    /*
+     * Open the report tab before starting any asynchronous requests.
+     * This prevents popup blocking and gives the user immediate feedback.
+     */
+    const w = window.open("", "_blank");
+
+    if (!w) {
+        alert(
+            "Popup blocked. Please allow popups and run XF Checker again."
+        );
+        return;
+    }
 
     const path = toContentPath(input);
-    let res = await getRefs(path);
-    let via = "page";
 
-    if (res.login) {
-        alert("Your AEM session looks expired — reload AEM, log in, and try again.");
-        return;
-    }
+    const initialHtml =
+        '<!doctype html>' +
+        '<html>' +
+        '<head>' +
+            '<meta charset="utf-8">' +
+            '<title>XF Checker — Loading</title>' +
+            '<style>' +
+                'body{' +
+                    'font:14px/1.5 Segoe UI,Arial,sans-serif;' +
+                    'margin:18px;' +
+                    'color:#1b1b1b' +
+                '}' +
+                'h2{margin:0 0 2px}' +
+                'small{color:#616161}' +
+                '.status-card{' +
+                    'margin-top:16px;' +
+                    'padding:18px;' +
+                    'border:1px solid #e1dfdd;' +
+                    'border-radius:6px;' +
+                    'background:#faf9f8' +
+                '}' +
+                '.spinner{' +
+                    'display:inline-block;' +
+                    'width:16px;' +
+                    'height:16px;' +
+                    'margin-right:9px;' +
+                    'border:2px solid #c8c6c4;' +
+                    'border-top-color:#0067b8;' +
+                    'border-radius:50%;' +
+                    'vertical-align:-3px;' +
+                    'animation:spin .8s linear infinite' +
+                '}' +
+                '#phase{' +
+                    'color:#0067b8;' +
+                    'font-weight:600' +
+                '}' +
+                '#detail{' +
+                    'margin-top:6px;' +
+                    'color:#616161' +
+                '}' +
+                '.error{' +
+                    'border-color:#a4262c;' +
+                    'background:#fde7e9' +
+                '}' +
+                '.error #phase{' +
+                    'color:#a4262c' +
+                '}' +
+                '@keyframes spin{' +
+                    'to{transform:rotate(360deg)}' +
+                '}' +
+            '</style>' +
+        '</head>' +
+        '<body>' +
+            '<h2>XF Checker</h2>' +
+            '<small>Page: ' + esc(path) + '</small>' +
+            '<div class="status-card" id="statusCard">' +
+                '<div>' +
+                    '<span class="spinner" id="spinner"></span>' +
+                    '<span id="phase">Preparing report…</span>' +
+                '</div>' +
+                '<div id="detail">' +
+                    'The report is running. Keep this tab open.' +
+                '</div>' +
+            '</div>' +
+        '</body>' +
+        '</html>';
 
-    if (res.ok && res.xfs.length === 0) {
-        const kids = await childPages(path);
-        if (kids.length) {
-            const agg = new Set();
-            for (const kid of kids) {
-                const rr = await getRefs(kid);
-                if (rr.ok) rr.xfs.forEach(x => agg.add(x));
-            }
-            if (agg.size) {
-                res = { ok: true, xfs: Array.from(agg) };
-                via = "children(" + kids.length + ")";
-            }
-        }
-    }
-
-    if (!res.ok) {
-        alert("Could not read references (HTTP " + (res.status || "?") + "). Are you logged in?");
-        return;
-    }
-
-    const rank = type => type === "Pricing XF" ? 0 : 1;
-    const xfs = res.xfs
-        .map(xf => ({
-            xf,
-            type: isPricing(xf) ? "Pricing XF" : "Others"
-        }))
-        .sort((a, b) => rank(a.type) - rank(b.type) || a.xf.localeCompare(b.xf));
-
-    const w = window.open("", "_blank");
-    if (!w) {
-        alert("Popup blocked. Please allow popups and run XF Checker again.");
-        return;
-    }
-
-    const trs = xfs.map((o, i) =>
-        '<tr id="r' + i + '">' +
-            '<td class="n">' + (i + 1) + '</td>' +
-            '<td class="' + (o.type === "Pricing XF" ? "tp" : "to") + '">' + o.type + '</td>' +
-            '<td class="x"><a href="' + esc(editLink(o.xf)) + '" target="_blank" rel="noopener">' + esc(o.xf) + '</a></td>' +
-            '<td id="u' + i + '">…</td>' +
-            '<td id="g' + i + '">…</td>' +
-        '</tr>'
-    ).join("");
-
-    const reportHtml =
-        '<!doctype html><html><head><meta charset="utf-8">' +
-        '<title>XFs (' + xfs.length + ') — ' + esc(path.split("/").pop()) + '</title>' +
-        '<style>' +
-        'body{font:14px/1.5 Segoe UI,Arial;margin:18px;color:#1b1b1b}' +
-        'h2{margin:0 0 2px}small{color:#616161}.bar{margin:10px 0}' +
-        'button{font:14px Segoe UI;padding:7px 14px;margin-right:8px;cursor:pointer;border:1px solid #8a8886;border-radius:4px;background:#0067b8;color:#fff}' +
-        'button.sec{background:#fff;color:#1b1b1b}' +
-        'table{border-collapse:collapse;width:100%;margin-top:8px}' +
-        'th,td{border:1px solid #e1dfdd;padding:6px 8px;text-align:left;vertical-align:top}' +
-        'th{background:#f3f2f1;position:sticky;top:0;cursor:pointer}' +
-        'td.n{color:#a19f9d;width:36px}' +
-        'td.x{font:12px Consolas,monospace;word-break:break-all}' +
-        'td.x a{color:#0067b8;text-decoration:none}' +
-        'td.x a:hover{text-decoration:underline}' +
-        'td.tp{color:#107c10;font-weight:600;white-space:nowrap}' +
-        'td.to{color:#616161;white-space:nowrap}' +
-        'td.stale{background:#f8d7da;color:#a4262c;font-weight:600}' +
-        'td.miss{background:#fff4ce;color:#8a6d00}' +
-        '.sw{display:inline-block;width:12px;height:12px;border:1px solid #ccc;vertical-align:middle;margin-right:4px}' +
-        '.legend span{margin-right:14px}#prog{color:#0067b8;font-weight:600}' +
-        '</style></head><body>' +
-        '<h2>' + xfs.length + ' XF(s) on this page</h2>' +
-        '<small>Page: ' + esc(path) + ' · via ' + via + ' · ' +
-            '<span id="prog">loading dates 0/' + xfs.length + '…</span> · ' +
-            '<b style="color:#a4262c" id="sc">0</b> en-gb older · ' +
-            '<span id="mc">0</span> en-gb missing</small>' +
-        '\<div class="bar"\>' +
-    '\<button id="copyPricingBtn"\>Copy Pricing XF list\</button\>' +
-    '\<button class="sec" id="printBtn"\>Print / Save PDF\</button\>' +
-            '<span class="legend">' +
-                '<span><span class="sw" style="background:#f8d7da"></span>en-gb older</span>' +
-                '<span><span class="sw" style="background:#fff4ce"></span>en-gb missing</span>' +
-            '</span>' +
-        '</div>' +
-        '\<table id="t"\>\<thead\>\<tr\>' +
-    '\<th\>#\</th\>' +
-    '\<th data-sort="1"\>Type\</th\>' +
-    '\<th data-sort="2"\>fragmentVariationPath\</th\>' +
-    '\<th data-sort="3"\>en-us modified\</th\>' +
-    '\<th data-sort="4"\>en-gb modified\</th\>' +
-'\</tr\>\</thead\>\<tbody\>' + trs + '\</tbody\>\</table\>' +
-        '\</body\>\</html\>';
-
-    w.document.write(reportHtml);
+    w.document.open();
+    w.document.write(initialHtml);
     w.document.close();
 
-const D = w.document;
+    const D = w.document;
 
-const sortTable = function (c) {
-    const tb = D.querySelector("#t tbody");
-    if (!tb) return;
+    const setStatus = (phase, detail) => {
+        const phaseElement = D.getElementById("phase");
+        const detailElement = D.getElementById("detail");
 
-    const rows = Array.prototype.slice.call(tb.rows);
-    const asc = tb.getAttribute("data-sort") !== "a" + c;
-
-    tb.setAttribute("data-sort", asc ? "a" + c : "");
-
-    rows.sort(function (a, b) {
-        const x = a.cells[c].innerText;
-        const y = b.cells[c].innerText;
-
-        if (asc) {
-            return x > y ? 1 : x < y ? -1 : 0;
+        if (phaseElement) {
+            phaseElement.textContent = phase;
         }
 
-        return x < y ? 1 : x > y ? -1 : 0;
-    });
-
-    rows.forEach(function (row) {
-        tb.appendChild(row);
-    });
-};
-
-const getPricingList = function () {
-    const out = [];
-    const tb = D.querySelector("#t tbody");
-
-    if (!tb) return "";
-
-    Array.prototype.slice.call(tb.rows).forEach(function (row) {
-        if (row.cells[1].innerText.trim() === "Pricing XF") {
-            out.push(row.cells[2].innerText.trim());
+        if (detailElement) {
+            detailElement.textContent = detail || "";
         }
-    });
 
-    return out.join("\n");
-};
-
-const copyPricingList = function () {
-    const btn = D.getElementById("copyPricingBtn");
-    const value = getPricingList();
-
-    if (!value) {
-        if (btn) btn.textContent = "No Pricing XF";
-        return;
-    }
-
-    const complete = function () {
-        if (btn) {
-            btn.textContent = "Copied ✓";
-            setTimeout(function () {
-                btn.textContent = "Copy Pricing XF list";
-            }, 1800);
-        }
+        w.document.title = "XF Checker — " + phase;
     };
 
-    const fallbackCopy = function () {
-        const textarea = D.createElement("textarea");
-        textarea.value = value;
-        textarea.style.position = "fixed";
-        textarea.style.left = "-9999px";
+    const showError = message => {
+        const card = D.getElementById("statusCard");
+        const spinner = D.getElementById("spinner");
 
-        D.body.appendChild(textarea);
-        textarea.focus();
-        textarea.select();
-
-        try {
-            D.execCommand("copy");
-            complete();
-        } catch (e) {
-            if (btn) btn.textContent = "Copy failed";
+        if (card) {
+            card.className = "status-card error";
         }
 
-        textarea.remove();
-    };
-
-    if (
-        w.navigator &&
-        w.navigator.clipboard &&
-        w.isSecureContext
-    ) {
-        w.navigator.clipboard.writeText(value)
-            .then(complete)
-            .catch(fallbackCopy);
-    } else {
-        fallbackCopy();
-    }
-};
-
-const copyBtn = D.getElementById("copyPricingBtn");
-if (copyBtn) {
-    copyBtn.addEventListener("click", copyPricingList);
-}
-
-const printBtn = D.getElementById("printBtn");
-if (printBtn) {
-    printBtn.addEventListener("click", function () {
-        w.print();
-    });
-}
-
-Array.prototype.slice.call(
-    D.querySelectorAll("th[data-sort]")
-).forEach(function (th) {
-    th.addEventListener("click", function () {
-        sortTable(Number(th.getAttribute("data-sort")));
-    });
-});
-
-let done = 0;
-    let stale = 0;
-    let miss = 0;
-
-    const setCell = (id, text, cls) => {
-        const el = D.getElementById(id);
-        if (!el) return;
-        el.textContent = text;
-        if (cls) el.className = cls;
-    };
-
-    const bump = () => {
-        const p = D.getElementById("prog");
-        if (p) {
-            p.textContent = "loading dates " + done + "/" + xfs.length + (done === xfs.length ? " ✓ done" : "…");
+        if (spinner) {
+            spinner.style.display = "none";
         }
 
-        const s = D.getElementById("sc");
-        if (s) s.textContent = stale;
-
-        const mm = D.getElementById("mc");
-        if (mm) mm.textContent = miss;
+        setStatus("Unable to complete XF Checker", message);
     };
 
-    const work = xfs.map((o, i) => async () => {
-        const xf = o.xf;
-        const usPath = swapLocale(xf, BASE);
-        const gbPath = swapLocale(xf, CMP);
+    try {
+        setStatus(
+            "Reading page references…",
+            "Checking the selected page for Experience Fragment references."
+        );
 
-        const pair = await Promise.all([
-            modOf(usPath),
-            gbPath !== usPath ? modOf(gbPath) : Promise.resolve({ raw: "", missing: true })
-        ]);
+        let res = await getRefs(path);
+        let via = "page";
 
-        const us = pair[0];
-        const gb = pair[1];
-        const fu = fmt(us.raw);
-        const fg = fmt(gb.raw);
+        if (res.login) {
+            showError(
+                "Your AEM session looks expired. Reload AEM, sign in, and run XF Checker again."
+            );
+            return;
+        }
 
-        setCell("u" + i, fu.str || "—");
+        if (res.ok && res.xfs.length === 0) {
+            setStatus(
+                "Checking for child pages…",
+                "No direct XF references were found. Looking for child pages."
+            );
 
-        if (!fu.date) {
-            setCell("g" + i, fg.str || "—");
-        } else if (gb.missing || !fg.date) {
-            setCell("g" + i, "(not found)", "miss");
-            miss++;
-        } else if (fg.date < fu.date) {
-            setCell("g" + i, fg.str, "stale");
-            stale++;
+            const kids = await childPages(path);
+
+            if (kids.length) {
+                const agg = new Set();
+
+                for (let childIndex = 0; childIndex < kids.length; childIndex++) {
+                    setStatus(
+                        "Checking child pages…",
+                        "Checking child page " +
+                        (childIndex + 1) +
+                        " of " +
+                        kids.length +
+                        ". Found " +
+                        agg.size +
+                        " unique XF(s) so far."
+                    );
+
+                    const rr = await getRefs(kids[childIndex]);
+
+                    if (rr.ok) {
+                        rr.xfs.forEach(x => agg.add(x));
+                    }
+                }
+
+                if (agg.size) {
+                    res = {
+                        ok: true,
+                        xfs: Array.from(agg)
+                    };
+
+                    via = "children(" + kids.length + ")";
+                }
+            }
+        }
+
+        if (!res.ok) {
+            showError(
+                "Could not read references. HTTP status: " +
+                (res.status || "?") +
+                ". Confirm that the AEM session is active."
+            );
+            return;
+        }
+
+        setStatus(
+            "Building XF report…",
+            "Found " + res.xfs.length + " unique XF(s)."
+        );
+
+        const rank = type =>
+            type === "Pricing XF" ? 0 : 1;
+
+        const xfs = res.xfs
+            .map(xf => ({
+                xf,
+                type: isPricing(xf) ? "Pricing XF" : "Others"
+            }))
+            .sort((a, b) =>
+                rank(a.type) - rank(b.type) ||
+                a.xf.localeCompare(b.xf)
+            );
+
+        const trs = xfs.map((o, i) => {
+            const preview = previewLink(o.xf);
+
+            return (
+                '<tr id="r' + i + '">' +
+                    '<td class="n">' + (i + 1) + '</td>' +
+                    '<td class="' +
+                        (o.type === "Pricing XF" ? "tp" : "to") +
+                    '">' +
+                        esc(o.type) +
+                    '</td>' +
+                    '<td class="x">' +
+                        '<a href="' +
+                            esc(editLink(o.xf)) +
+                            '" target="_blank" rel="noopener noreferrer">' +
+                            esc(o.xf) +
+                        '</a>' +
+                    '</td>' +
+                    '<td class="x preview">' +
+                        '<a href="' +
+                            esc(preview) +
+                            '" target="_blank" rel="noopener noreferrer" title="' +
+                            esc(preview) +
+                        '">' +
+                            esc(preview) +
+                        '</a>' +
+                    '</td>' +
+                    '<td id="u' + i + '">…</td>' +
+                    '<td id="g' + i + '">…</td>' +
+                '</tr>'
+            );
+        }).join("");
+
+        const reportHtml =
+            '<!doctype html>' +
+            '<html>' +
+            '<head>' +
+                '<meta charset="utf-8">' +
+                '<title>XFs (' +
+                    xfs.length +
+                    ') — ' +
+                    esc(path.split("/").pop()) +
+                '</title>' +
+                '<style>' +
+                    'body{' +
+                        'font:14px/1.5 Segoe UI,Arial,sans-serif;' +
+                        'margin:18px;' +
+                        'color:#1b1b1b' +
+                    '}' +
+                    'h2{margin:0 0 2px}' +
+                    'small{color:#616161}' +
+                    '.bar{' +
+                        'display:flex;' +
+                        'align-items:center;' +
+                        'flex-wrap:wrap;' +
+                        'gap:8px;' +
+                        'margin:12px 0' +
+                    '}' +
+                    'button{' +
+                        'font:14px Segoe UI,Arial,sans-serif;' +
+                        'padding:7px 14px;' +
+                        'cursor:pointer;' +
+                        'border:1px solid #8a8886;' +
+                        'border-radius:4px;' +
+                        'background:#0067b8;' +
+                        'color:#fff' +
+                    '}' +
+                    'button.sec{' +
+                        'background:#fff;' +
+                        'color:#1b1b1b' +
+                    '}' +
+                    'table{' +
+                        'border-collapse:collapse;' +
+                        'width:100%;' +
+                        'margin-top:8px' +
+                    '}' +
+                    'th,td{' +
+                        'border:1px solid #e1dfdd;' +
+                        'padding:6px 8px;' +
+                        'text-align:left;' +
+                        'vertical-align:top' +
+                    '}' +
+                    'th{' +
+                        'background:#f3f2f1;' +
+                        'position:sticky;' +
+                        'top:0;' +
+                        'cursor:pointer;' +
+                        'z-index:1' +
+                    '}' +
+                    'th:first-child{' +
+                        'cursor:default' +
+                    '}' +
+                    'td.n{' +
+                        'color:#a19f9d;' +
+                        'width:36px' +
+                    '}' +
+                    'td.x{' +
+                        'font:12px Consolas,monospace;' +
+                        'word-break:break-all' +
+                    '}' +
+                    'td.x a{' +
+                        'color:#0067b8;' +
+                        'text-decoration:none' +
+                    '}' +
+                    'td.x a:hover{' +
+                        'text-decoration:underline' +
+                    '}' +
+                    'td.preview{' +
+                        'min-width:320px' +
+                    '}' +
+                    'td.tp{' +
+                        'color:#107c10;' +
+                        'font-weight:600;' +
+                        'white-space:nowrap' +
+                    '}' +
+                    'td.to{' +
+                        'color:#616161;' +
+                        'white-space:nowrap' +
+                    '}' +
+                    'td.stale{' +
+                        'background:#f8d7da;' +
+                        'color:#a4262c;' +
+                        'font-weight:600' +
+                    '}' +
+                    'td.miss{' +
+                        'background:#fff4ce;' +
+                        'color:#8a6d00' +
+                    '}' +
+                    '.sw{' +
+                        'display:inline-block;' +
+                        'width:12px;' +
+                        'height:12px;' +
+                        'border:1px solid #ccc;' +
+                        'vertical-align:middle;' +
+                        'margin-right:4px' +
+                    '}' +
+                    '.legend{' +
+                        'margin-left:4px' +
+                    '}' +
+                    '.legend span{' +
+                        'margin-right:14px' +
+                    '}' +
+                    '#prog{' +
+                        'color:#0067b8;' +
+                        'font-weight:600' +
+                    '}' +
+                    '@media print{' +
+                        '.bar button{display:none}' +
+                        'th{position:static}' +
+                    '}' +
+                '</style>' +
+            '</head>' +
+            '<body>' +
+                '<h2>' +
+                    xfs.length +
+                    ' XF(s) on this page' +
+                '</h2>' +
+                '<small>' +
+                    'Page: ' +
+                    esc(path) +
+                    ' · via ' +
+                    esc(via) +
+                    ' · ' +
+                    '<span id="prog">' +
+                        'loading dates 0/' +
+                        xfs.length +
+                        '…' +
+                    '</span>' +
+                    ' · ' +
+                    '<b style="color:#a4262c" id="sc">0</b>' +
+                    ' en-gb older · ' +
+                    '<span id="mc">0</span>' +
+                    ' en-gb missing' +
+                '</small>' +
+
+                '<div class="bar">' +
+                    '<button id="copyPricingBtn">' +
+                        'Copy Pricing XF list' +
+                    '</button>' +
+
+                    '<button id="copyAllBtn">' +
+                        'Copy all XF' +
+                    '</button>' +
+
+                    '<button id="copyPreviewBtn">' +
+                        'Copy all XF previews' +
+                    '</button>' +
+
+                    '<button class="sec" id="printBtn">' +
+                        'Print / Save PDF' +
+                    '</button>' +
+
+                    '<span class="legend">' +
+                        '<span>' +
+                            '<span class="sw" style="background:#f8d7da"></span>' +
+                            'en-gb older' +
+                        '</span>' +
+
+                        '<span>' +
+                            '<span class="sw" style="background:#fff4ce"></span>' +
+                            'en-gb missing' +
+                        '</span>' +
+                    '</span>' +
+                '</div>' +
+
+                '<table id="t">' +
+                    '<thead>' +
+                        '<tr>' +
+                            '<th>#</th>' +
+                            '<th data-sort="1">Type</th>' +
+                            '<th data-sort="2">fragmentVariationPath</th>' +
+                            '<th data-sort="3">XF Preview</th>' +
+                            '<th data-sort="4">en-us modified</th>' +
+                            '<th data-sort="5">en-gb modified</th>' +
+                        '</tr>' +
+                    '</thead>' +
+                    '<tbody>' +
+                        trs +
+                    '</tbody>' +
+                '</table>' +
+            '</body>' +
+            '</html>';
+
+        w.document.open();
+        w.document.write(reportHtml);
+        w.document.close();
+
+        const RD = w.document;
+
+        const sortTable = function (columnIndex) {
+            const tb = RD.querySelector("#t tbody");
+            if (!tb) return;
+
+            const rows = Array.prototype.slice.call(tb.rows);
+            const asc =
+                tb.getAttribute("data-sort") !==
+                "a" + columnIndex;
+
+            tb.setAttribute(
+                "data-sort",
+                asc ? "a" + columnIndex : ""
+            );
+
+            rows.sort(function (a, b) {
+                const x =
+                    a.cells[columnIndex].innerText.trim();
+                const y =
+                    b.cells[columnIndex].innerText.trim();
+
+                if (asc) {
+                    return x > y ? 1 : x < y ? -1 : 0;
+                }
+
+                return x < y ? 1 : x > y ? -1 : 0;
+            });
+
+            rows.forEach(function (row) {
+                tb.appendChild(row);
+            });
+        };
+
+        const getPricingList = function () {
+            const out = [];
+            const tb = RD.querySelector("#t tbody");
+
+            if (!tb) return "";
+
+            Array.prototype.slice.call(tb.rows).forEach(function (row) {
+                if (
+                    row.cells[1].innerText.trim() ===
+                    "Pricing XF"
+                ) {
+                    out.push(
+                        row.cells[2].innerText.trim()
+                    );
+                }
+            });
+
+            return out.join("\n");
+        };
+
+        const getAllXFList = function () {
+            const out = [];
+            const tb = RD.querySelector("#t tbody");
+
+            if (!tb) return "";
+
+            Array.prototype.slice.call(tb.rows).forEach(function (row) {
+                out.push(
+                    row.cells[2].innerText.trim()
+                );
+            });
+
+            return out.join("\n");
+        };
+
+        const getPreviewList = function () {
+            const out = [];
+            const tb = RD.querySelector("#t tbody");
+
+            if (!tb) return "";
+
+            Array.prototype.slice.call(tb.rows).forEach(function (row) {
+                const link =
+                    row.cells[3].querySelector("a");
+
+                if (link && link.href) {
+                    out.push(link.href);
+                }
+            });
+
+            return out.join("\n");
+        };
+
+        const copyValue = function (
+            button,
+            value,
+            normalLabel,
+            emptyLabel
+        ) {
+            if (!value) {
+                if (button) {
+                    button.textContent = emptyLabel;
+
+                    setTimeout(function () {
+                        button.textContent = normalLabel;
+                    }, 1800);
+                }
+
+                return;
+            }
+
+            const complete = function () {
+                if (!button) return;
+
+                button.textContent = "Copied ✓";
+
+                setTimeout(function () {
+                    button.textContent = normalLabel;
+                }, 1800);
+            };
+
+            const failed = function () {
+                if (!button) return;
+
+                button.textContent = "Copy failed";
+
+                setTimeout(function () {
+                    button.textContent = normalLabel;
+                }, 1800);
+            };
+
+            const fallbackCopy = function () {
+                const textarea =
+                    RD.createElement("textarea");
+
+                textarea.value = value;
+                textarea.style.position = "fixed";
+                textarea.style.left = "-9999px";
+                textarea.style.top = "0";
+
+                RD.body.appendChild(textarea);
+                textarea.focus();
+                textarea.select();
+
+                try {
+                    const copied =
+                        RD.execCommand("copy");
+
+                    if (copied) {
+                        complete();
+                    } else {
+                        failed();
+                    }
+                } catch (e) {
+                    failed();
+                }
+
+                textarea.remove();
+            };
+
+            if (
+                w.navigator &&
+                w.navigator.clipboard &&
+                w.isSecureContext
+            ) {
+                w.navigator.clipboard
+                    .writeText(value)
+                    .then(complete)
+                    .catch(fallbackCopy);
+            } else {
+                fallbackCopy();
+            }
+        };
+
+        const pricingButton =
+            RD.getElementById("copyPricingBtn");
+
+        if (pricingButton) {
+            pricingButton.addEventListener(
+                "click",
+                function () {
+                    copyValue(
+                        pricingButton,
+                        getPricingList(),
+                        "Copy Pricing XF list",
+                        "No Pricing XF"
+                    );
+                }
+            );
+        }
+
+        const allXFButton =
+            RD.getElementById("copyAllBtn");
+
+        if (allXFButton) {
+            allXFButton.addEventListener(
+                "click",
+                function () {
+                    copyValue(
+                        allXFButton,
+                        getAllXFList(),
+                        "Copy all XF",
+                        "No XF"
+                    );
+                }
+            );
+        }
+
+        const previewButton =
+            RD.getElementById("copyPreviewBtn");
+
+        if (previewButton) {
+            previewButton.addEventListener(
+                "click",
+                function () {
+                    copyValue(
+                        previewButton,
+                        getPreviewList(),
+                        "Copy all XF previews",
+                        "No XF previews"
+                    );
+                }
+            );
+        }
+
+        const printButton =
+            RD.getElementById("printBtn");
+
+        if (printButton) {
+            printButton.addEventListener(
+                "click",
+                function () {
+                    w.print();
+                }
+            );
+        }
+
+        Array.prototype.slice.call(
+            RD.querySelectorAll("th[data-sort]")
+        ).forEach(function (th) {
+            th.addEventListener(
+                "click",
+                function () {
+                    sortTable(
+                        Number(
+                            th.getAttribute("data-sort")
+                        )
+                    );
+                }
+            );
+        });
+
+        let done = 0;
+        let stale = 0;
+        let miss = 0;
+
+        const setCell = (id, text, cls) => {
+            const el = RD.getElementById(id);
+            if (!el) return;
+
+            el.textContent = text;
+
+            if (cls) {
+                el.className = cls;
+            }
+        };
+
+        const bump = () => {
+            const p = RD.getElementById("prog");
+
+            if (p) {
+                p.textContent =
+                    "loading dates " +
+                    done +
+                    "/" +
+                    xfs.length +
+                    (
+                        done === xfs.length
+                            ? " ✓ done"
+                            : "…"
+                    );
+            }
+
+            const s = RD.getElementById("sc");
+            if (s) s.textContent = stale;
+
+            const mm = RD.getElementById("mc");
+            if (mm) mm.textContent = miss;
+        };
+
+        /*
+         * Preserve the existing en-us and en-gb modified-date
+         * comparison logic.
+         */
+        const work = xfs.map((o, i) => async () => {
+            const xf = o.xf;
+            const usPath = swapLocale(xf, BASE);
+            const gbPath = swapLocale(xf, CMP);
+
+            const pair = await Promise.all([
+                modOf(usPath),
+                gbPath !== usPath
+                    ? modOf(gbPath)
+                    : Promise.resolve({
+                        raw: "",
+                        missing: true
+                    })
+            ]);
+
+            const us = pair[0];
+            const gb = pair[1];
+            const fu = fmt(us.raw);
+            const fg = fmt(gb.raw);
+
+            setCell(
+                "u" + i,
+                fu.str || "—"
+            );
+
+            if (!fu.date) {
+                setCell(
+                    "g" + i,
+                    fg.str || "—"
+                );
+            } else if (gb.missing || !fg.date) {
+                setCell(
+                    "g" + i,
+                    "(not found)",
+                    "miss"
+                );
+
+                miss++;
+            } else if (fg.date < fu.date) {
+                setCell(
+                    "g" + i,
+                    fg.str,
+                    "stale"
+                );
+
+                stale++;
+            } else {
+                setCell(
+                    "g" + i,
+                    fg.str
+                );
+            }
+
+            done++;
+            bump();
+        });
+
+        if (!work.length) {
+            bump();
         } else {
-            setCell("g" + i, fg.str);
+            let idx = 0;
+
+            const runners = Array.from(
+                {
+                    length: Math.min(
+                        CONC,
+                        work.length
+                    )
+                },
+                async () => {
+                    while (idx < work.length) {
+                        const j = idx++;
+                        await work[j]();
+                    }
+                }
+            );
+
+            await Promise.all(runners);
         }
 
-        done++;
-        bump();
-    });
-
-    let idx = 0;
-    const runners = Array.from({ length: Math.min(CONC, work.length) }, async () => {
-        while (idx < work.length) {
-            const j = idx++;
-            await work[j]();
-        }
-    });
-
-    await Promise.all(runners);
+        w.document.title =
+            "XFs (" +
+            xfs.length +
+            ") — " +
+            path.split("/").pop();
+    } catch (error) {
+        showError(
+            error && error.message
+                ? error.message
+                : String(error)
+        );
+    }
 })();
 `;
 // Page Basic info bookmarklet
